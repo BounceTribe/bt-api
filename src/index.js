@@ -16,7 +16,6 @@ app.use(bodyParser.json())
 
 
 app.use('/notifications/:type', (req, res, next) => {
-  console.log("req.params", req.params, req.body )
   let {data} = req.body
   let {type} = req.params
   let byId,
@@ -32,16 +31,12 @@ app.use('/notifications/:type', (req, res, next) => {
       break
 
     }
+    case 'SESSION_FEEDBACK_RECEIVED':
     case 'PROJECT_FEEDBACK_RECEIVED': {
       let {node} = data.Comment
       byId = node.author.id
       forId = node.project.creator.id
       break
-
-    }
-    case 'SESSION_FEEDBACK_RECEIVED': {
-      break
-
     }
     case 'SESSION_FEEDBACK_APPRECIATED': {
       break

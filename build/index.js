@@ -25,7 +25,6 @@ app.set('port', port);
 app.use(_bodyParser2.default.json());
 
 app.use('/notifications/:type', function (req, res, next) {
-  console.log("req.params", req.params, req.body);
   var data = req.body.data;
   var type = req.params.type;
 
@@ -43,16 +42,13 @@ app.use('/notifications/:type', function (req, res, next) {
       {
         break;
       }
+    case 'SESSION_FEEDBACK_RECEIVED':
     case 'PROJECT_FEEDBACK_RECEIVED':
       {
         var node = data.Comment.node;
 
         byId = node.author.id;
         forId = node.project.creator.id;
-        break;
-      }
-    case 'SESSION_FEEDBACK_RECEIVED':
-      {
         break;
       }
     case 'SESSION_FEEDBACK_APPRECIATED':
