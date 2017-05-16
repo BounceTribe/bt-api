@@ -48,8 +48,20 @@ app.use(_bodyParser2.default.json());
 var simple = 'https://api.graph.cool/simple/v1/bt-api';
 
 app.use('/notifications', function (req, res, next) {
+  var _req$body$createdNode = req.body.createdNode,
+      author = _req$body$createdNode.author,
+      project = _req$body$createdNode.project;
+  var byId = createdNode.author.id;
+  var forId = createdNode.project.creator.id;
 
-  console.log("req.body", req.body);
+  var type = "PROJECT_COMMENT";
+
+  (0, _createNotification2.default)({
+    byId: byId,
+    forId: forId,
+    type: type
+  });
+  res();
 });
 
 var server = app.listen(app.get('port'), function () {

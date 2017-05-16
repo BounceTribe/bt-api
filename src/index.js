@@ -30,8 +30,17 @@ const simple = 'https://api.graph.cool/simple/v1/bt-api'
 
 app.use('/notifications', (req, res, next) => {
 
-  console.log("req.body", req.body )
+  let {author, project} = req.body.createdNode
+  let {id: byId} = createdNode.author
+  let {id: forId} = createdNode.project.creator
+  let type = "PROJECT_COMMENT"
 
+  createNotification({
+    byId,
+    forId,
+    type
+  })
+  res()
 })
 
 const server = app.listen(app.get('port'), ()=>{
