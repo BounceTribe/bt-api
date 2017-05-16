@@ -49,7 +49,7 @@ app.use('/notifications/:type', function (req, res, next) {
 
         byId = node.author.id;
         forId = node.project.creator.id;
-        if (session) {
+        if (node.session) {
           extra = 'sessionId: "' + node.session.id + '"';
           type = 'SESSIN_FEEDBACK_RECEIVED';
         } else if (project) {

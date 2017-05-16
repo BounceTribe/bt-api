@@ -36,7 +36,7 @@ app.use('/notifications/:type', (req, res, next) => {
       let {node} = data.Comment
       byId = node.author.id
       forId = node.project.creator.id
-      if (session) {
+      if (node.session) {
         extra = `sessionId: "${node.session.id}"`
         type = 'SESSIN_FEEDBACK_RECEIVED'
       } else if (project) {
