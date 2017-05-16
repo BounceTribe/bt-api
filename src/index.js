@@ -1,7 +1,7 @@
 import "babel-polyfill"
 import express from 'express'
 import graphqlHTTP from 'express-graphql'
-// import bodyparser from 'body-parser'
+import bodyParser from 'body-parser'
 import fetch from 'node-fetch'
 import createNotification from './createNotification'
 // import schema from './schema'
@@ -16,7 +16,7 @@ app.set('port', port)
 app.use(bodyParser.urlencoded({ extended: false }))
 
 
-app.use(bodyparser.json())
+app.use(bodyParser.json())
 
 
 // app.use('*', graphqlHTTP((req) =>{
