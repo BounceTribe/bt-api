@@ -12,8 +12,8 @@ export default async function createNotification({type, forId, byId}) {
         mutation {
           createNotification (
             type: ${type}
-            notificationForId: ${forId}
-            triggeredById: ${byId}
+            notificationForId: "${forId}"
+            triggeredById: "${byId}"
           ) {
             id
           }

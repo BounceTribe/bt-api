@@ -29,7 +29,7 @@ exports.default = function () {
                 'content-type': 'application/json'
               },
               body: JSON.stringify({
-                query: '\n        mutation {\n          createNotification (\n            type: ' + type + '\n            notificationForId: ' + forId + '\n            triggeredById: ' + byId + '\n          ) {\n            id\n          }\n        }\n      '
+                query: '\n        mutation {\n          createNotification (\n            type: ' + type + '\n            notificationForId: "' + forId + '"\n            triggeredById: "' + byId + '"\n          ) {\n            id\n          }\n        }\n      '
               })
             }).then(function (response) {
               return response.json();

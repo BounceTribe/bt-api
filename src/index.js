@@ -16,11 +16,8 @@ app.use(bodyParser.json())
 
 
 app.use('/notifications/:type', (req, res, next) => {
-  console.log("req.params", req.params )
-  // let {author, project} = req.body.createdNode
-  // let {id: byId} = author
-  // let {id: forId} = project.creator
-  let {createdNode: node} = req.body
+  console.log("req.params", req.params, req.body )
+  let {data} = req.body
   let {type} = req.params
   let byId,
       forId
@@ -28,8 +25,7 @@ app.use('/notifications/:type', (req, res, next) => {
 
   switch (type) {
     case 'FRIEND_REQUEST': {
-      byId = node.author.id
-      forId = node.project.creator.id
+
       break
     }
     case 'FRIEND_REQUEST_ACCEPTED': {
@@ -37,6 +33,9 @@ app.use('/notifications/:type', (req, res, next) => {
 
     }
     case 'PROJECT_FEEDBACK_RECEIVED': {
+      let {node} = data.Comment
+      byId = node.author.id
+      forId = node.project.creator.id
       break
 
     }

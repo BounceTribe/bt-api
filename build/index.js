@@ -25,11 +25,8 @@ app.set('port', port);
 app.use(_bodyParser2.default.json());
 
 app.use('/notifications/:type', function (req, res, next) {
-  console.log("req.params", req.params);
-  // let {author, project} = req.body.createdNode
-  // let {id: byId} = author
-  // let {id: forId} = project.creator
-  var node = req.body.createdNode;
+  console.log("req.params", req.params, req.body);
+  var data = req.body.data;
   var type = req.params.type;
 
   var byId = void 0,
@@ -39,8 +36,7 @@ app.use('/notifications/:type', function (req, res, next) {
   switch (type) {
     case 'FRIEND_REQUEST':
       {
-        byId = node.author.id;
-        forId = node.project.creator.id;
+
         break;
       }
     case 'FRIEND_REQUEST_ACCEPTED':
@@ -49,6 +45,10 @@ app.use('/notifications/:type', function (req, res, next) {
       }
     case 'PROJECT_FEEDBACK_RECEIVED':
       {
+        var node = data.Comment.node;
+
+        byId = node.author.id;
+        forId = node.project.creator.id;
         break;
       }
     case 'SESSION_FEEDBACK_RECEIVED':
