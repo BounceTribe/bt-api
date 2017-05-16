@@ -24,8 +24,6 @@ app.set('port', port);
 
 app.use(_bodyParser2.default.json());
 
-var simple = 'https://api.graph.cool/simple/v1/bt-api';
-
 app.use('/notifications/:type', function (req, res, next) {
   console.log("req.params", req.params);
   // let {author, project} = req.body.createdNode

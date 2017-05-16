@@ -17,10 +17,12 @@ exports.default = function () {
     var type = _ref2.type,
         forId = _ref2.forId,
         byId = _ref2.byId;
+    var simple;
     return regeneratorRuntime.wrap(function _callee$(_context) {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:
+            simple = 'https://api.graph.cool/simple/v1/bt-api';
             return _context.abrupt('return', (0, _nodeFetch2.default)(simple, {
               method: 'POST',
               headers: {
@@ -35,7 +37,7 @@ exports.default = function () {
               console.log("json", json);
             }));
 
-          case 1:
+          case 2:
           case 'end':
             return _context.stop();
         }

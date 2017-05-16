@@ -14,7 +14,6 @@ app.set('port', port)
 app.use(bodyParser.json())
 
 
-const simple = 'https://api.graph.cool/simple/v1/bt-api'
 
 app.use('/notifications/:type', (req, res, next) => {
   console.log("req.params", req.params )
