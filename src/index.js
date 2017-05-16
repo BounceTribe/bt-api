@@ -28,8 +28,18 @@ app.use(bodyparser.json())
 const simple = 'https://api.graph.cool/simple/v1/bt-api'
 
 app.use('/notifications', (req, res, next) => {
-  console.log(req.body)
-  fetch(simple, {
+
+  console.log("req.body", req.body )
+
+})
+
+const server = app.listen(app.get('port'), ()=>{
+  console.log(`Server is running at port ${app.get('port')}`)
+})
+
+
+async function createNotification({type, forId, byId}) {
+  return fetch(simple, {
     method: 'POST',
     headers: {
         'content-type': 'application/json'
@@ -37,16 +47,18 @@ app.use('/notifications', (req, res, next) => {
     body: JSON.stringify({
       query: `
         mutation {
-
+          createNotification (
+            type: ${type}
+            notificationForId: ${forId}
+            triggeredById: ${byId}
+          ) {
+            id
+          }
         }
       `
     }),
   }).then(response => response.json())
     .then(json => {
-      console.log("json", json.createdNode )
+      console.log("json", json )
     })
-})
-
-const server = app.listen(app.get('port'), ()=>{
-  console.log(`Server is running at port ${app.get('port')}`)
-})
+}
