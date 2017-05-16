@@ -48,6 +48,7 @@ app.use(_bodyParser2.default.json());
 var simple = 'https://api.graph.cool/simple/v1/bt-api';
 
 app.use('/notifications', function (req, res, next) {
+  console.log("req.body", req);
   var _req$body$createdNode = req.body.createdNode,
       author = _req$body$createdNode.author,
       project = _req$body$createdNode.project;
