@@ -8,7 +8,7 @@ import fetch from 'node-fetch'
 
 const app = express()
 
-let port = process.env.PORT || 3000
+let port = process.env.PORT || 5000
 
 app.set('port', port)
 
