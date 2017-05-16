@@ -52,7 +52,7 @@ app.use('/notifications/:type', function (req, res, next) {
         if (node.session) {
           extra = 'sessionId: "' + node.session.id + '"';
           type = 'SESSIN_FEEDBACK_RECEIVED';
-        } else if (project) {
+        } else if (node.project) {
           extra = 'projectId: "' + node.project.id + '"';
           type = 'PROJECT_FEEDBACK_RECEIVED';
         }
