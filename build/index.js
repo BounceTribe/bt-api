@@ -14,6 +14,10 @@ var _bodyParser = require('body-parser');
 
 var _bodyParser2 = _interopRequireDefault(_bodyParser);
 
+var _nodeFetch = require('node-fetch');
+
+var _nodeFetch2 = _interopRequireDefault(_nodeFetch);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 // import schema from './schema'
@@ -37,8 +41,23 @@ app.use(_bodyParser2.default.json());
 // }))
 
 
+var simple = 'https://api.graph.cool/simple/v1/bt-api';
+
 app.use('/notifications', function (req, res, next) {
   console.log(req.body);
+  (0, _nodeFetch2.default)(simple, {
+    method: 'POST',
+    headers: {
+      'content-type': 'application/json'
+    },
+    body: JSON.stringify({
+      query: '\n        mutation {\n\n        }\n      '
+    })
+  }).then(function (response) {
+    return response.json();
+  }).then(function (json) {
+    console.log("json", json.createdNode);
+  });
 });
 
 var server = app.listen(app.get('port'), function () {

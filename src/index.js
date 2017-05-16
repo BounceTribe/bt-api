@@ -2,6 +2,7 @@ import "babel-polyfill"
 import express from 'express'
 import graphqlHTTP from 'express-graphql'
 import bodyparser from 'body-parser'
+import fetch from 'node-fetch'
 // import schema from './schema'
 // import authMiddleware from './authMiddleware'
 
@@ -24,8 +25,26 @@ app.use(bodyparser.json())
 // }))
 
 
+const simple = 'https://api.graph.cool/simple/v1/bt-api'
+
 app.use('/notifications', (req, res, next) => {
   console.log(req.body)
+  fetch(simple, {
+    method: 'POST',
+    headers: {
+        'content-type': 'application/json'
+      },
+    body: JSON.stringify({
+      query: `
+        mutation {
+
+        }
+      `
+    }),
+  }).then(response => response.json())
+    .then(json => {
+      console.log("json", json.createdNode )
+    })
 })
 
 const server = app.listen(app.get('port'), ()=>{
