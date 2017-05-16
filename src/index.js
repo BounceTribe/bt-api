@@ -3,6 +3,7 @@ import express from 'express'
 import graphqlHTTP from 'express-graphql'
 import bodyparser from 'body-parser'
 import fetch from 'node-fetch'
+import createNotification from './createNotification'
 // import schema from './schema'
 // import authMiddleware from './authMiddleware'
 
@@ -36,29 +37,3 @@ app.use('/notifications', (req, res, next) => {
 const server = app.listen(app.get('port'), ()=>{
   console.log(`Server is running at port ${app.get('port')}`)
 })
-
-
-async function createNotification({type, forId, byId}) {
-  return fetch(simple, {
-    method: 'POST',
-    headers: {
-        'content-type': 'application/json'
-      },
-    body: JSON.stringify({
-      query: `
-        mutation {
-          createNotification (
-            type: ${type}
-            notificationForId: ${forId}
-            triggeredById: ${byId}
-          ) {
-            id
-          }
-        }
-      `
-    }),
-  }).then(response => response.json())
-    .then(json => {
-      console.log("json", json )
-    })
-}
