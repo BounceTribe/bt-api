@@ -1,7 +1,5 @@
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
-
 require('babel-polyfill');
 
 var _express = require('express');
@@ -54,9 +52,7 @@ var simple = 'https://api.graph.cool/simple/v1/bt-api';
 
 app.use('/notifications', function (req, res, next) {
   console.log("req.body", req.body);
-  console.log(_typeof(req.body));
-  console.log(req.body.data);
-  console.log(req.body.valueOf());
+  console.log("Object.keys(req.body)", Object.keys(req.body));
   var _req$body$createdNode = req.body.createdNode,
       author = _req$body$createdNode.author,
       project = _req$body$createdNode.project;

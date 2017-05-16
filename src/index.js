@@ -33,9 +33,7 @@ const simple = 'https://api.graph.cool/simple/v1/bt-api'
 
 app.use('/notifications', (req, res, next) => {
   console.log("req.body", req.body )
-  console.log(typeof req.body)
-  console.log(req.body.data)
-  console.log(req.body.valueOf())
+  console.log("Object.keys(req.body)", Object.keys(req.body) )
   let {author, project} = req.body.createdNode
   let {id: byId} = createdNode.author
   let {id: forId} = createdNode.project.creator
