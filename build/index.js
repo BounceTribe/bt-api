@@ -30,8 +30,9 @@ var port = process.env.PORT || 5000;
 
 app.set('port', port);
 
-// app.use(bodyparser.json())
+app.use(bodyParser.urlencoded({ extended: false }));
 
+app.use(bodyparser.json());
 
 // app.use('*', graphqlHTTP((req) =>{
 //   console.log("req", req )
