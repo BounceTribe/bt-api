@@ -10,10 +10,6 @@ var _expressGraphql = require('express-graphql');
 
 var _expressGraphql2 = _interopRequireDefault(_expressGraphql);
 
-var _bodyParser = require('body-parser');
-
-var _bodyParser2 = _interopRequireDefault(_bodyParser);
-
 var _nodeFetch = require('node-fetch');
 
 var _nodeFetch2 = _interopRequireDefault(_nodeFetch);
@@ -27,13 +23,15 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 // import schema from './schema'
 // import authMiddleware from './authMiddleware'
 
+// import bodyparser from 'body-parser'
 var app = (0, _express2.default)();
 
 var port = process.env.PORT || 5000;
 
 app.set('port', port);
 
-app.use(_bodyParser2.default.json());
+// app.use(bodyparser.json())
+
 
 // app.use('*', graphqlHTTP((req) =>{
 //   console.log("req", req )
