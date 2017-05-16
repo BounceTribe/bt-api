@@ -38,7 +38,7 @@ app.use('/notifications/:type', (req, res, next) => {
       forId = node.project.creator.id
       if (node.session) {
         extra = `sessionId: "${node.session.id}"`
-        type = 'SESSIN_FEEDBACK_RECEIVED'
+        type = 'SESSION_FEEDBACK_RECEIVED'
       } else if (node.project) {
         extra = `projectId: "${node.project.id}"`
         type = 'PROJECT_FEEDBACK_RECEIVED'
