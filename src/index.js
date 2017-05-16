@@ -32,17 +32,18 @@ app.use('/notifications/:type', (req, res, next) => {
       break
 
     }
-    case 'SESSION_FEEDBACK_RECEIVED':
-    case 'PROJECT_FEEDBACK_RECEIVED': {
+    case 'COMMENT': {
       let {node} = data.Comment
       byId = node.author.id
       forId = node.project.creator.id
-      extra = `projectId: "${node.project.id}"`
+      if (session) {
+        extra = `sessionId: "${node.session.id}"`
+        type = 'SESSIN_FEEDBACK_RECEIVED'
+      } else if (project) {
+        extra = `projectId: "${node.project.id}"`
+        type = 'PROJECT_FEEDBACK_RECEIVED'
+      }
       break
-    }
-    case 'SESSION_FEEDBACK_APPRECIATED': {
-      break
-
     }
     case 'FB_FRIEND_JOINED': {
       break

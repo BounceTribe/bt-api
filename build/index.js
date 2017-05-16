@@ -43,18 +43,19 @@ app.use('/notifications/:type', function (req, res, next) {
       {
         break;
       }
-    case 'SESSION_FEEDBACK_RECEIVED':
-    case 'PROJECT_FEEDBACK_RECEIVED':
+    case 'COMMENT':
       {
         var node = data.Comment.node;
 
         byId = node.author.id;
         forId = node.project.creator.id;
-        extra = 'projectId: "' + node.project.id + '"';
-        break;
-      }
-    case 'SESSION_FEEDBACK_APPRECIATED':
-      {
+        if (session) {
+          extra = 'sessionId: "' + node.session.id + '"';
+          type = 'SESSIN_FEEDBACK_RECEIVED';
+        } else if (project) {
+          extra = 'projectId: "' + node.project.id + '"';
+          type = 'PROJECT_FEEDBACK_RECEIVED';
+        }
         break;
       }
     case 'FB_FRIEND_JOINED':
