@@ -32,7 +32,8 @@ app.use(bodyParser.json())
 const simple = 'https://api.graph.cool/simple/v1/bt-api'
 
 app.use('/notifications', (req, res, next) => {
-  console.log("req.body", req )
+  console.log("req.body", req.body )
+  console.log(typeof req.body)
   let {author, project} = req.body.createdNode
   let {id: byId} = createdNode.author
   let {id: forId} = createdNode.project.creator
