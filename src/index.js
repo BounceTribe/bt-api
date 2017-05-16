@@ -19,7 +19,8 @@ app.use('/notifications/:type', (req, res, next) => {
   let {data} = req.body
   let {type} = req.params
   let byId,
-      forId
+      forId,
+      extra
   let sendEmail = false
 
   switch (type) {
@@ -36,6 +37,7 @@ app.use('/notifications/:type', (req, res, next) => {
       let {node} = data.Comment
       byId = node.author.id
       forId = node.project.creator.id
+      extra = `project: "${node.project.id}"`
       break
     }
     case 'SESSION_FEEDBACK_APPRECIATED': {
@@ -62,7 +64,8 @@ app.use('/notifications/:type', (req, res, next) => {
   createNotification({
     byId,
     forId,
-    type
+    type,
+    extra
   })
   next()
 })

@@ -16,7 +16,8 @@ exports.default = function () {
   var _ref = _asyncToGenerator(regeneratorRuntime.mark(function _callee(_ref2) {
     var type = _ref2.type,
         forId = _ref2.forId,
-        byId = _ref2.byId;
+        byId = _ref2.byId,
+        extra = _ref2.extra;
     var simple;
     return regeneratorRuntime.wrap(function _callee$(_context) {
       while (1) {
@@ -29,7 +30,7 @@ exports.default = function () {
                 'content-type': 'application/json'
               },
               body: JSON.stringify({
-                query: '\n        mutation {\n          createNotification (\n            type: ' + type + '\n            notificationForId: "' + forId + '"\n            triggeredById: "' + byId + '"\n          ) {\n            id\n          }\n        }\n      '
+                query: '\n        mutation {\n          createNotification (\n            type: ' + type + '\n            notificationForId: "' + forId + '"\n            triggeredById: "' + byId + '"\n            ' + (extra ? extra : '') + '\n          ) {\n            id\n          }\n        }\n      '
               })
             }).then(function (response) {
               return response.json();

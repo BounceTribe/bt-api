@@ -29,7 +29,8 @@ app.use('/notifications/:type', function (req, res, next) {
   var type = req.params.type;
 
   var byId = void 0,
-      forId = void 0;
+      forId = void 0,
+      extra = void 0;
   var sendEmail = false;
 
   switch (type) {
@@ -49,6 +50,7 @@ app.use('/notifications/:type', function (req, res, next) {
 
         byId = node.author.id;
         forId = node.project.creator.id;
+        extra = 'project: "' + node.project.id + '"';
         break;
       }
     case 'SESSION_FEEDBACK_APPRECIATED':
@@ -74,7 +76,8 @@ app.use('/notifications/:type', function (req, res, next) {
   (0, _createNotification2.default)({
     byId: byId,
     forId: forId,
-    type: type
+    type: type,
+    extra: extra
   });
   next();
 });
