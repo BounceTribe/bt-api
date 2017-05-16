@@ -1,3 +1,5 @@
+import fetch from 'node-fetch'
+
 export default async function createNotification({type, forId, byId}) {
   return fetch(simple, {
     method: 'POST',
