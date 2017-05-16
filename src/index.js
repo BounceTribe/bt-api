@@ -37,7 +37,7 @@ app.use('/notifications/:type', (req, res, next) => {
       let {node} = data.Comment
       byId = node.author.id
       forId = node.project.creator.id
-      extra = `project: "${node.project.id}"`
+      extra = `projectId: "${node.project.id}"`
       break
     }
     case 'SESSION_FEEDBACK_APPRECIATED': {
