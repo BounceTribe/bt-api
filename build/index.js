@@ -37,7 +37,8 @@ app.set('port', port);
 
 app.use(_bodyParser2.default.urlencoded({ extended: false }));
 
-app.use(_bodyParser2.default.json());
+// app.use(bodyParser.json())
+
 
 // app.use('*', graphqlHTTP((req) =>{
 //   console.log("req", req )
