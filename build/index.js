@@ -10,15 +10,14 @@ var _expressGraphql = require('express-graphql');
 
 var _expressGraphql2 = _interopRequireDefault(_expressGraphql);
 
-var _schema = require('./schema');
+var _bodyParser = require('body-parser');
 
-var _schema2 = _interopRequireDefault(_schema);
-
-var _authMiddleware = require('./authMiddleware');
-
-var _authMiddleware2 = _interopRequireDefault(_authMiddleware);
+var _bodyParser2 = _interopRequireDefault(_bodyParser);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+// import schema from './schema'
+// import authMiddleware from './authMiddleware'
 
 var app = (0, _express2.default)();
 
@@ -26,17 +25,21 @@ var port = process.env.PORT || 3000;
 
 app.set('port', port);
 
-// app.use(authMiddleware)
+app.use(_bodyParser2.default.json());
+
+// app.use('*', graphqlHTTP((req) =>{
+//   console.log("req", req )
+//   console.log("req.body", req.body )
+//   return {
+//     schema: schema,
+//     graphiql: true,
+//   }
+// }))
 
 
-app.use('*', (0, _expressGraphql2.default)(function (req) {
-  console.log("req", req);
-  console.log("req.body", req.body);
-  return {
-    schema: _schema2.default,
-    graphiql: true
-  };
-}));
+app.use('/notifications', function (req, res, next) {
+  console.log(req.body);
+});
 
 var server = app.listen(app.get('port'), function () {
   console.log('Server is running at port ' + app.get('port'));
