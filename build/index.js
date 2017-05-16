@@ -28,20 +28,61 @@ var simple = 'https://api.graph.cool/simple/v1/bt-api';
 
 app.use('/notifications/:type', function (req, res, next) {
   console.log("req.params", req.params);
-  var _req$body$createdNode = req.body.createdNode,
-      author = _req$body$createdNode.author,
-      project = _req$body$createdNode.project;
-  var byId = author.id;
-  var forId = project.creator.id;
+  // let {author, project} = req.body.createdNode
+  // let {id: byId} = author
+  // let {id: forId} = project.creator
+  var node = req.body.createdNode;
+  var type = req.params.type;
 
-  var type = "PROJECT_COMMENT";
+  var byId = void 0,
+      forId = void 0;
+  var sendEmail = false;
+
+  switch (type) {
+    case 'FRIEND_REQUEST':
+      {
+        byId = node.author.id;
+        forId = node.project.creator.id;
+        break;
+      }
+    case 'FRIEND_REQUEST_ACCEPTED':
+      {
+        break;
+      }
+    case 'PROJECT_FEEDBACK_RECEIVED':
+      {
+        break;
+      }
+    case 'SESSION_FEEDBACK_RECEIVED':
+      {
+        break;
+      }
+    case 'SESSION_FEEDBACK_APPRECIATED':
+      {
+        break;
+      }
+    case 'FB_FRIEND_JOINED':
+      {
+        break;
+      }
+    case 'MESSAGE':
+      {
+        break;
+      }
+    case 'BOUNCED':
+      {
+        break;
+      }
+    default:
+      {}
+  }
 
   (0, _createNotification2.default)({
     byId: byId,
     forId: forId,
     type: type
   });
-  res();
+  next();
 });
 
 var server = app.listen(app.get('port'), function () {
