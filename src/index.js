@@ -19,18 +19,23 @@ app.use('/notifications/:type', (req, res, next) => {
   let {data} = req.body
   let {type} = req.params
   let byId,
-      forId,
-      extra
+      forId
   let sendEmail = false
+  let extra = ''
 
   switch (type) {
-    case 'FRIEND_REQUEST': {
-
+    case 'FRIENDS': {
+      let {node} = data.FriendRequest
+      if (node.accepted) {
+        type = "FRIEND_REQUEST_ACCEPTED"
+        byId = node.recipient.id
+        forId = node.actor.id
+      } else {
+        type = "FRIEND_REQUEST"
+        byId = node.actor.id
+        forId = node.recipient.id
+      }
       break
-    }
-    case 'FRIEND_REQUEST_ACCEPTED': {
-      break
-
     }
     case 'COMMENT': {
       let {node} = data.Comment
