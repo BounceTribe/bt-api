@@ -29,31 +29,38 @@ app.use('/notifications/:type', function (req, res, next) {
   var type = req.params.type;
 
   var byId = void 0,
-      forId = void 0,
-      extra = void 0;
+      forId = void 0;
   var sendEmail = false;
+  var extra = '';
 
   switch (type) {
-    case 'FRIEND_REQUEST':
+    case 'FRIENDS':
       {
+        var node = data.FriendRequest.node;
 
-        break;
-      }
-    case 'FRIEND_REQUEST_ACCEPTED':
-      {
+        console.log("node", node);
+        if (node.accepted) {
+          type = "FRIEND_REQUEST_ACCEPTED";
+          byId = node.recipient.id;
+          forId = node.actor.id;
+        } else {
+          type = "FRIEND_REQUEST";
+          byId = node.actor.id;
+          forId = node.recipient.id;
+        }
         break;
       }
     case 'COMMENT':
       {
-        var node = data.Comment.node;
+        var _node = data.Comment.node;
 
-        byId = node.author.id;
-        forId = node.project.creator.id;
-        if (node.session) {
-          extra = 'sessionId: "' + node.session.id + '"';
+        byId = _node.author.id;
+        forId = _node.project.creator.id;
+        if (_node.session) {
+          extra = 'sessionId: "' + _node.session.id + '"';
           type = 'SESSION_FEEDBACK_RECEIVED';
-        } else if (node.project) {
-          extra = 'projectId: "' + node.project.id + '"';
+        } else if (_node.project) {
+          extra = 'projectId: "' + _node.project.id + '"';
           type = 'PROJECT_FEEDBACK_RECEIVED';
         }
         break;
