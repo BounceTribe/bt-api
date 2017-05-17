@@ -20,9 +20,9 @@ var _friendRequestAccepted2 = _interopRequireDefault(_friendRequestAccepted);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var domain = 'mail.bouncetribe.com';
-var mailgunKey = process.env.mailgunKey;
+var apiKey = process.env.mailgunKey;
 
-var mailgun = new _mailgunJs2.default({ mailgunKey: mailgunKey, domain: domain });
+var mailgun = new _mailgunJs2.default({ apiKey: apiKey, domain: domain });
 
 function sendEmail(_ref) {
   var toEmail = _ref.toEmail,

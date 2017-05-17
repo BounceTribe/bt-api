@@ -4,8 +4,8 @@ import friendRequestAccepted from './friendRequestAccepted'
 
 
 const domain = 'mail.bouncetribe.com'
-const {mailgunKey} = process.env
-const mailgun = new Mailgun({mailgunKey, domain})
+const {mailgunKey: apiKey} = process.env
+const mailgun = new Mailgun({apiKey, domain})
 
 export default function sendEmail({toEmail,forHandle,type}) {
 
