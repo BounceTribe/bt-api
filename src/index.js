@@ -20,9 +20,12 @@ app.use('/notifications/:type', (req, res, next) => {
   let {data} = req.body
   let {type} = req.params
   let byId,
-      forId
+      forId,
+      toEmail,
+      forHandle
   let emailNotification = false
   let extra = ''
+
   switch (type) {
     case 'FRIENDS': {
       let {node} = data.FriendRequest

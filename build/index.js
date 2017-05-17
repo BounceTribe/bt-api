@@ -33,9 +33,12 @@ app.use('/notifications/:type', function (req, res, next) {
   var type = req.params.type;
 
   var byId = void 0,
-      forId = void 0;
+      forId = void 0,
+      toEmail = void 0,
+      forHandle = void 0;
   var emailNotification = false;
   var extra = '';
+
   switch (type) {
     case 'FRIENDS':
       {
