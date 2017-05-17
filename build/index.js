@@ -48,13 +48,13 @@ app.use('/notifications/:type', function (req, res, next) {
           type = "FRIEND_REQUEST_ACCEPTED";
           byId = node.recipient.id;
           forId = node.actor.id;
-          forHandle = node.actor.handle;
-          toEmail = node.actor.email;
-          emailNotification = true;
         } else {
           type = "FRIEND_REQUEST";
           byId = node.actor.id;
           forId = node.recipient.id;
+          forHandle = node.recipient.handle;
+          toEmail = node.recipient.email;
+          emailNotification = true;
         }
         break;
       }
