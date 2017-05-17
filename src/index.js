@@ -2,6 +2,7 @@ import "babel-polyfill"
 import express from 'express'
 import bodyParser from 'body-parser'
 import createNotification from './createNotification'
+import sendEmail from './emails'
 
 const app = express()
 
@@ -20,7 +21,7 @@ app.use('/notifications/:type', (req, res, next) => {
   let {type} = req.params
   let byId,
       forId
-  let sendEmail = false
+  let emailNotification = false
   let extra = ''
   switch (type) {
     case 'FRIENDS': {
@@ -29,6 +30,9 @@ app.use('/notifications/:type', (req, res, next) => {
         type = "FRIEND_REQUEST_ACCEPTED"
         byId = node.recipient.id
         forId = node.actor.id
+        forHandle = node.actor.handle
+        toEmail = node.actor.email
+        emailNotification =  true
       } else {
         type = "FRIEND_REQUEST"
         byId = node.actor.id
@@ -40,6 +44,8 @@ app.use('/notifications/:type', (req, res, next) => {
       let {node} = data.Comment
       byId = node.author.id
       forId = node.project.creator.id
+      toEmail = node.project.creator.email
+      forHandle = node.project.creator.handle
       if (node.session) {
         extra = `sessionId: "${node.session.id}"`
         type = 'SESSION_FEEDBACK_RECEIVED'
@@ -47,6 +53,7 @@ app.use('/notifications/:type', (req, res, next) => {
         extra = `projectId: "${node.project.id}"`
         type = 'PROJECT_FEEDBACK_RECEIVED'
       }
+      emailNotification =  true
       break
     }
     case 'FB_FRIEND_JOINED': {
@@ -72,6 +79,15 @@ app.use('/notifications/:type', (req, res, next) => {
     type,
     extra
   })
+
+  if (emailNotification) {
+    sendEmail({
+      toEmail,
+      forHandle,
+      type
+    })
+  }
+
   next()
 })
 

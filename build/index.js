@@ -14,6 +14,10 @@ var _createNotification = require('./createNotification');
 
 var _createNotification2 = _interopRequireDefault(_createNotification);
 
+var _emails = require('./emails');
+
+var _emails2 = _interopRequireDefault(_emails);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var app = (0, _express2.default)();
@@ -30,7 +34,7 @@ app.use('/notifications/:type', function (req, res, next) {
 
   var byId = void 0,
       forId = void 0;
-  var sendEmail = false;
+  var emailNotification = false;
   var extra = '';
   switch (type) {
     case 'FRIENDS':
@@ -41,6 +45,9 @@ app.use('/notifications/:type', function (req, res, next) {
           type = "FRIEND_REQUEST_ACCEPTED";
           byId = node.recipient.id;
           forId = node.actor.id;
+          forHandle = node.actor.handle;
+          toEmail = node.actor.email;
+          emailNotification = true;
         } else {
           type = "FRIEND_REQUEST";
           byId = node.actor.id;
@@ -54,6 +61,8 @@ app.use('/notifications/:type', function (req, res, next) {
 
         byId = _node.author.id;
         forId = _node.project.creator.id;
+        toEmail = _node.project.creator.email;
+        forHandle = _node.project.creator.handle;
         if (_node.session) {
           extra = 'sessionId: "' + _node.session.id + '"';
           type = 'SESSION_FEEDBACK_RECEIVED';
@@ -61,6 +70,7 @@ app.use('/notifications/:type', function (req, res, next) {
           extra = 'projectId: "' + _node.project.id + '"';
           type = 'PROJECT_FEEDBACK_RECEIVED';
         }
+        emailNotification = true;
         break;
       }
     case 'FB_FRIEND_JOINED':
@@ -85,6 +95,15 @@ app.use('/notifications/:type', function (req, res, next) {
     type: type,
     extra: extra
   });
+
+  if (emailNotification) {
+    (0, _emails2.default)({
+      toEmail: toEmail,
+      forHandle: forHandle,
+      type: type
+    });
+  }
+
   next();
 });
 
