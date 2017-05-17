@@ -22,7 +22,7 @@ app.use('/notifications/:type', (req, res, next) => {
       forId
   let sendEmail = false
   let extra = ''
-
+  console.log("data.updatedFields", data.updatedFields )
   switch (type) {
     case 'FRIENDS': {
       let {node} = data.FriendRequest

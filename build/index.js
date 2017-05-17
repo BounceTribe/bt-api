@@ -32,7 +32,7 @@ app.use('/notifications/:type', function (req, res, next) {
       forId = void 0;
   var sendEmail = false;
   var extra = '';
-
+  console.log("data.updatedFields", data.updatedFields);
   switch (type) {
     case 'FRIENDS':
       {
