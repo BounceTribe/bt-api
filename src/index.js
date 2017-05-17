@@ -35,6 +35,7 @@ app.use('/notifications/:type', (req, res, next) => {
         forId = node.actor.id
 
       } else {
+        console.log("node", node )
         type = "FRIEND_REQUEST"
         byId = node.actor.id
         forId = node.recipient.id
