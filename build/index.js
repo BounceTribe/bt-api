@@ -32,13 +32,11 @@ app.use('/notifications/:type', function (req, res, next) {
       forId = void 0;
   var sendEmail = false;
   var extra = '';
-  console.log("data.updatedFields", data.updatedFields);
   switch (type) {
     case 'FRIENDS':
       {
         var node = data.FriendRequest.node;
 
-        console.log("node", node);
         if (node.accepted) {
           type = "FRIEND_REQUEST_ACCEPTED";
           byId = node.recipient.id;
