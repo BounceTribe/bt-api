@@ -45,7 +45,7 @@ export default function sendEmail({toEmail,forHandle,type}) {
 
   if (html) {
     mailgun.messages().send({
-       from: "hello@bouncetribe.com",
+       from: "BounceTribe <hello@bouncetribe.com>",
        to: toEmail,
        html,
        subject
