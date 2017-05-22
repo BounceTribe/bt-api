@@ -22,7 +22,7 @@ app.use('/notifications/:type', (req, res, next) => {
   let byId,
       forId,
       toEmail,
-      forHandle
+      byHandle
   let emailNotification = false
   let extra = ''
 
@@ -35,11 +35,10 @@ app.use('/notifications/:type', (req, res, next) => {
         forId = node.actor.id
 
       } else {
-        console.log("node", node )
         type = "FRIEND_REQUEST"
         byId = node.actor.id
         forId = node.recipient.id
-        forHandle = node.recipient.handle
+        byHandle = node.recipient.handle
         toEmail = node.recipient.email
         emailNotification =  true
       }
@@ -50,7 +49,7 @@ app.use('/notifications/:type', (req, res, next) => {
       byId = node.author.id
       forId = node.project.creator.id
       toEmail = node.project.creator.email
-      forHandle = node.project.creator.handle
+      byHandle = node.author.handle
       if (node.session) {
         extra = `sessionId: "${node.session.id}"`
         type = 'SESSION_FEEDBACK_RECEIVED'
@@ -88,7 +87,7 @@ app.use('/notifications/:type', (req, res, next) => {
   if (emailNotification) {
     sendEmail({
       toEmail,
-      forHandle,
+      byHandle,
       type
     })
   }
