@@ -35,7 +35,7 @@ app.use('/notifications/:type', function (req, res, next) {
   var byId = void 0,
       forId = void 0,
       toEmail = void 0,
-      forHandle = void 0;
+      byHandle = void 0;
   var emailNotification = false;
   var extra = '';
 
@@ -49,11 +49,10 @@ app.use('/notifications/:type', function (req, res, next) {
           byId = node.recipient.id;
           forId = node.actor.id;
         } else {
-          console.log("node", node);
           type = "FRIEND_REQUEST";
           byId = node.actor.id;
           forId = node.recipient.id;
-          forHandle = node.recipient.handle;
+          byHandle = node.recipient.handle;
           toEmail = node.recipient.email;
           emailNotification = true;
         }
@@ -66,7 +65,7 @@ app.use('/notifications/:type', function (req, res, next) {
         byId = _node.author.id;
         forId = _node.project.creator.id;
         toEmail = _node.project.creator.email;
-        forHandle = _node.project.creator.handle;
+        byHandle = _node.author.handle;
         if (_node.session) {
           extra = 'sessionId: "' + _node.session.id + '"';
           type = 'SESSION_FEEDBACK_RECEIVED';
@@ -103,7 +102,7 @@ app.use('/notifications/:type', function (req, res, next) {
   if (emailNotification) {
     (0, _emails2.default)({
       toEmail: toEmail,
-      forHandle: forHandle,
+      byHandle: byHandle,
       type: type
     });
   }

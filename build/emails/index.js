@@ -68,7 +68,7 @@ function sendEmail(_ref) {
 
   if (html) {
     mailgun.messages().send({
-      from: "hello@bouncetribe.com",
+      from: "BounceTribe <hello@bouncetribe.com>",
       to: toEmail,
       html: html,
       subject: subject
