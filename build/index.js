@@ -36,7 +36,8 @@ app.use('/notifications/:type', function (req, res, next) {
       forId = void 0,
       toEmail = void 0,
       byHandle = void 0,
-      sessionId = void 0;
+      sessionId = void 0,
+      projectTitle = void 0;
   var emailNotification = false;
   var extra = '';
 

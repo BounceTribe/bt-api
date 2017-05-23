@@ -23,7 +23,8 @@ app.use('/notifications/:type', (req, res, next) => {
       forId,
       toEmail,
       byHandle,
-      sessionId
+      sessionId,
+      projectTitle
   let emailNotification = false
   let extra = ''
 
