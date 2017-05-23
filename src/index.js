@@ -22,7 +22,8 @@ app.use('/notifications/:type', (req, res, next) => {
   let byId,
       forId,
       toEmail,
-      byHandle
+      byHandle,
+      sessionId
   let emailNotification = false
   let extra = ''
 
@@ -53,9 +54,11 @@ app.use('/notifications/:type', (req, res, next) => {
       if (node.session) {
         extra = `sessionId: "${node.session.id}"`
         type = 'SESSION_FEEDBACK_RECEIVED'
+        sessionId = node.session.id
       } else if (node.project) {
         extra = `projectId: "${node.project.id}"`
         type = 'PROJECT_FEEDBACK_RECEIVED'
+        projectTitle = node.project.title
       }
       emailNotification =  true
       break
@@ -88,7 +91,9 @@ app.use('/notifications/:type', (req, res, next) => {
     sendEmail({
       toEmail,
       byHandle,
-      type
+      type,
+      projectTitle,
+      sessionId
     })
   }
 

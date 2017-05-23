@@ -26,8 +26,10 @@ var mailgun = new _mailgunJs2.default({ apiKey: apiKey, domain: domain });
 
 function sendEmail(_ref) {
   var toEmail = _ref.toEmail,
-      forHandle = _ref.forHandle,
-      type = _ref.type;
+      byHandle = _ref.byHandle,
+      type = _ref.type,
+      projectTitle = _ref.projectTitle,
+      sessionId = _ref.sessionId;
 
 
   var html = '';
@@ -39,14 +41,19 @@ function sendEmail(_ref) {
       }
     case 'FRIEND_REQUEST_ACCEPTED':
       {
-        html = (0, _friendRequestAccepted2.default)(forHandle);
+        html = (0, _friendRequestAccepted2.default)(byHandle);
         subject = 'Friend Request Accepted';
         break;
       }
     case 'PROJECT_FEEDBACK_RECEIVED':
+      {
+        html = (0, _feedbackReceived2.default)(byHandle, projectTitle);
+        subject = 'Feedback Received';
+        break;
+      }
     case 'SESSION_FEEDBACK_RECEIVED':
       {
-        html = (0, _feedbackReceived2.default)(forHandle);
+        html = (0, _feedbackReceived2.default)(byHandle, sessionId);
         subject = 'Feedback Received';
         break;
       }
