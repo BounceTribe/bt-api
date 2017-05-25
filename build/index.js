@@ -77,7 +77,12 @@ app.use('/notifications/:type', function (req, res, next) {
           type = 'PROJECT_FEEDBACK_RECEIVED';
           projectTitle = _node.project.title;
         }
-        emailNotification = true;
+        var existingComment = _node.project.comments.find(function (comment) {
+          return comment.author.id === byId;
+        });
+        if (typeof existingComment === 'undefined') {
+          emailNotification = true;
+        }
         break;
       }
     case 'FB_FRIEND_JOINED':

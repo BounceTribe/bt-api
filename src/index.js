@@ -61,7 +61,12 @@ app.use('/notifications/:type', (req, res, next) => {
         type = 'PROJECT_FEEDBACK_RECEIVED'
         projectTitle = node.project.title
       }
-      emailNotification =  true
+      let existingComment = node.project.comments.find( (comment) => {
+        return comment.author.id === byId
+      })
+      if (typeof existingComment === 'undefined') {
+        emailNotification =  true
+      }
       break
     }
     case 'FB_FRIEND_JOINED': {
