@@ -4,8 +4,8 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = feedbackReceived;
-var mjml = function mjml(handle, link) {
-  return "\n  <mjml>\n    <mj-body>\n      <mj-container>\n        <mj-section>\n          <mj-column>\n\n            <mj-text font-size=\"30px\" font-weight=\"bold\" color=\"#555555\" font-family=\"helvetica\" line-height=\"40px\" padding-bottom=\"10px\">Feedback Received!</mj-text>\n\n            <mj-text font-size=\"16px\" color=\"#777777\" font-family=\"helvetica\" padding-bottom=\"20px\">" + handle + " has given you some feedback. See what they had to say.</mj-text>\n\n            <mj-button inner-padding=\"16px 30px\" font-size=\"15px\" font-family=\"Helvetica, Arial\" align=\"left\" background-color=\"#9075F3\" color=\"white\" href=\"https://test.bouncetribe.com/" + handle + "/" + link + "\">\n              View Feedback\n            </mj-button>\n\n          </mj-column>\n        </mj-section>\n      </mj-container>\n    </mj-body>\n  </mjml>\n";
+var mjml = function mjml(byHandle, link, forHandle) {
+  return "\n  <mjml>\n    <mj-body>\n      <mj-container>\n        <mj-section>\n          <mj-column>\n\n            <mj-text font-size=\"30px\" font-weight=\"bold\" color=\"#555555\" font-family=\"helvetica\" line-height=\"40px\" padding-bottom=\"10px\">Feedback Received!</mj-text>\n\n            <mj-text font-size=\"16px\" color=\"#777777\" font-family=\"helvetica\" padding-bottom=\"20px\">" + byHandle + " has given you some feedback. See what they had to say.</mj-text>\n\n            <mj-button inner-padding=\"16px 30px\" font-size=\"15px\" font-family=\"Helvetica, Arial\" align=\"left\" background-color=\"#9075F3\" color=\"white\" href=\"https://test.bouncetribe.com/" + forHandle + "/" + link + "\">\n              View Feedback\n            </mj-button>\n\n          </mj-column>\n        </mj-section>\n      </mj-container>\n    </mj-body>\n  </mjml>\n";
 };
 
 function feedbackReceived(handle, link) {

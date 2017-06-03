@@ -29,7 +29,8 @@ function sendEmail(_ref) {
       byHandle = _ref.byHandle,
       type = _ref.type,
       projectTitle = _ref.projectTitle,
-      sessionId = _ref.sessionId;
+      sessionId = _ref.sessionId,
+      forHandle = _ref.forHandle;
 
 
   var html = '';
@@ -49,13 +50,13 @@ function sendEmail(_ref) {
       }
     case 'PROJECT_FEEDBACK_RECEIVED':
       {
-        html = (0, _feedbackReceived2.default)(byHandle, projectTitle);
+        html = (0, _feedbackReceived2.default)(byHandle, projectTitle, forHandle);
         subject = 'Feedback Received';
         break;
       }
     case 'SESSION_FEEDBACK_RECEIVED':
       {
-        html = (0, _feedbackReceived2.default)(byHandle, sessionId);
+        html = (0, _feedbackReceived2.default)(byHandle, sessionId, forHandle);
         subject = 'Feedback Received';
         break;
       }

@@ -7,7 +7,7 @@ const domain = 'mail.bouncetribe.com'
 const {mailgunKey: apiKey} = process.env
 const mailgun = new Mailgun({apiKey, domain})
 
-export default function sendEmail({toEmail,byHandle,type, projectTitle, sessionId}) {
+export default function sendEmail({toEmail,byHandle,type, projectTitle, sessionId, forHandle}) {
 
   let html = ''
   let subject = ''
@@ -23,12 +23,12 @@ export default function sendEmail({toEmail,byHandle,type, projectTitle, sessionI
       break
     }
     case 'PROJECT_FEEDBACK_RECEIVED':{
-      html = feedbackReceived(byHandle, projectTitle)
+      html = feedbackReceived(byHandle, projectTitle, forHandle)
       subject = 'Feedback Received'
       break
     }
     case 'SESSION_FEEDBACK_RECEIVED': {
-      html = feedbackReceived(byHandle, sessionId)
+      html = feedbackReceived(byHandle, sessionId, forHandle)
       subject = 'Feedback Received'
       break
     }

@@ -1,4 +1,4 @@
-let mjml = (handle, link) => `
+let mjml = (byHandle, link, forHandle) => `
   <mjml>
     <mj-body>
       <mj-container>
@@ -7,9 +7,9 @@ let mjml = (handle, link) => `
 
             <mj-text font-size="30px" font-weight="bold" color="#555555" font-family="helvetica" line-height="40px" padding-bottom="10px">Feedback Received!</mj-text>
 
-            <mj-text font-size="16px" color="#777777" font-family="helvetica" padding-bottom="20px">${handle} has given you some feedback. See what they had to say.</mj-text>
+            <mj-text font-size="16px" color="#777777" font-family="helvetica" padding-bottom="20px">${byHandle} has given you some feedback. See what they had to say.</mj-text>
 
-            <mj-button inner-padding="16px 30px" font-size="15px" font-family="Helvetica, Arial" align="left" background-color="#9075F3" color="white" href="https://test.bouncetribe.com/${handle}/${link}">
+            <mj-button inner-padding="16px 30px" font-size="15px" font-family="Helvetica, Arial" align="left" background-color="#9075F3" color="white" href="https://test.bouncetribe.com/${forHandle}/${link}">
               View Feedback
             </mj-button>
 

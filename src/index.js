@@ -93,7 +93,8 @@ app.use('/notifications/:type', (req, res, next) => {
       toEmail,
       byHandle,
       sessionId,
-      projectTitle
+      projectTitle,
+      forHandle
   let emailNotification = true
   let sendNotification = true
   let extra = ''
@@ -125,6 +126,7 @@ app.use('/notifications/:type', (req, res, next) => {
       byId = node.author.id
       forId = node.project.creator.id
       toEmail = node.project.creator.email
+      forHandle = node.project.creator.handle
       byHandle = node.author.handle
       if (node.session) {
         extra = `sessionId: "${node.session.id}"`
@@ -182,7 +184,8 @@ app.use('/notifications/:type', (req, res, next) => {
       byHandle,
       type,
       projectTitle,
-      sessionId
+      sessionId,
+      forHandle
     })
   }
 

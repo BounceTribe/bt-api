@@ -103,7 +103,8 @@ app.use('/notifications/:type', function (req, res, next) {
       toEmail = void 0,
       byHandle = void 0,
       sessionId = void 0,
-      projectTitle = void 0;
+      projectTitle = void 0,
+      forHandle = void 0;
   var emailNotification = true;
   var sendNotification = true;
   var extra = '';
@@ -139,6 +140,7 @@ app.use('/notifications/:type', function (req, res, next) {
         byId = _node.author.id;
         forId = _node.project.creator.id;
         toEmail = _node.project.creator.email;
+        forHandle = _node.project.creator.handle;
         byHandle = _node.author.handle;
         if (_node.session) {
           extra = 'sessionId: "' + _node.session.id + '"';
@@ -194,7 +196,8 @@ app.use('/notifications/:type', function (req, res, next) {
       byHandle: byHandle,
       type: type,
       projectTitle: projectTitle,
-      sessionId: sessionId
+      sessionId: sessionId,
+      forHandle: forHandle
     });
   }
 
