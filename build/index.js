@@ -18,6 +18,10 @@ var _emails = require('./emails');
 
 var _emails2 = _interopRequireDefault(_emails);
 
+var _cors = require('cors');
+
+var _cors2 = _interopRequireDefault(_cors);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var app = (0, _express2.default)();
@@ -25,6 +29,8 @@ var app = (0, _express2.default)();
 var port = process.env.PORT || 5000;
 
 app.set('port', port);
+
+app.use((0, _cors2.default)());
 
 app.use(_bodyParser2.default.json());
 

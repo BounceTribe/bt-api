@@ -3,6 +3,8 @@ import express from 'express'
 import bodyParser from 'body-parser'
 import createNotification from './createNotification'
 import sendEmail from './emails'
+import cors from 'cors'
+
 
 const app = express()
 
@@ -10,7 +12,7 @@ let port = process.env.PORT || 5000
 
 app.set('port', port)
 
-
+app.use(cors())
 
 app.use(bodyParser.json())
 
