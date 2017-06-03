@@ -64,7 +64,6 @@ app.use('/notifications/:type', (req, res, next) => {
       let existingComment = node.project.comments.filter( (comment) => {
         return comment.author.id === byId
       })
-      console.log("existingComment", existingComment)
 
       if (existingComment.length > 1) {
         emailNotification = false
@@ -99,7 +98,6 @@ app.use('/notifications/:type', (req, res, next) => {
 
   }
 
-  console.log("emailNotification", emailNotification )
   if (emailNotification) {
     sendEmail({
       toEmail,

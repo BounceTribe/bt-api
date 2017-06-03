@@ -11,7 +11,6 @@ export default function sendEmail({toEmail,byHandle,type, projectTitle, sessionI
 
   let html = ''
   let subject = ''
-  console.log("type", type)
   switch (type) {
     case 'FRIEND_REQUEST': {
       html = friendRequestAccepted(byHandle)
@@ -50,9 +49,6 @@ export default function sendEmail({toEmail,byHandle,type, projectTitle, sessionI
     }
   }
 
-  console.log("html", html )
-  console.log("toEmail", toEmail )
-
   if (html) {
     mailgun.messages().send({
        from: "BounceTribe <hello@bouncetribe.com>",
@@ -63,7 +59,6 @@ export default function sendEmail({toEmail,byHandle,type, projectTitle, sessionI
       if (error) {
         console.log(error)
       }
-      console.log('body', body)
 
     })
   }

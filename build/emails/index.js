@@ -34,7 +34,6 @@ function sendEmail(_ref) {
 
   var html = '';
   var subject = '';
-  console.log("type", type);
   switch (type) {
     case 'FRIEND_REQUEST':
       {
@@ -76,9 +75,6 @@ function sendEmail(_ref) {
       {}
   }
 
-  console.log("html", html);
-  console.log("toEmail", toEmail);
-
   if (html) {
     mailgun.messages().send({
       from: "BounceTribe <hello@bouncetribe.com>",
@@ -89,7 +85,6 @@ function sendEmail(_ref) {
       if (error) {
         console.log(error);
       }
-      console.log('body', body);
     });
   }
 }

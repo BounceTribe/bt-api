@@ -80,7 +80,6 @@ app.use('/notifications/:type', function (req, res, next) {
         var existingComment = _node.project.comments.filter(function (comment) {
           return comment.author.id === byId;
         });
-        console.log("existingComment", existingComment);
 
         if (existingComment.length > 1) {
           emailNotification = false;
@@ -113,7 +112,6 @@ app.use('/notifications/:type', function (req, res, next) {
     });
   }
 
-  console.log("emailNotification", emailNotification);
   if (emailNotification) {
     (0, _emails2.default)({
       toEmail: toEmail,
