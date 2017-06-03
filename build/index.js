@@ -48,7 +48,6 @@ var expiration = Date.now();
 function refreshCredentials() {
   return new Promise(function (resolve, reject) {
     spotify.clientCredentialsGrant().then(function (resp) {
-      console.log(resp);
       spotify.setAccessToken(resp.body['access_token']);
       expiration = Date.now() + 3000000;
       resolve();
@@ -61,7 +60,6 @@ function refreshCredentials() {
 function searchArtists(query) {
   return new Promise(function (resolve, reject) {
     spotify.searchArtists(query).then(function (resp) {
-      console.log(resp);
       var options = resp.body.artists.items.map(function (artist) {
         return {
           value: {
@@ -73,7 +71,6 @@ function searchArtists(query) {
           label: artist.name
         };
       });
-      console.log(options);
       resolve({ options: options });
     }, function (error) {
       console.log("error", error);

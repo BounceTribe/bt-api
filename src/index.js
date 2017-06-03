@@ -28,7 +28,6 @@ function refreshCredentials() {
   return new Promise( (resolve, reject) => {
     spotify.clientCredentialsGrant().then(
       (resp) => {
-        console.log(resp)
         spotify.setAccessToken(resp.body['access_token'])
         expiration = Date.now() + 3000000
         resolve()
@@ -45,7 +44,6 @@ function searchArtists(query) {
   return new Promise( (resolve, reject) => {
     spotify.searchArtists(query).then(
       (resp) => {
-        console.log(resp)
         let options = resp.body.artists.items.map((artist) => {
           return {
             value: {
@@ -57,7 +55,6 @@ function searchArtists(query) {
             label: artist.name
           }
         })
-        console.log(options)
         resolve({options})
       },
       (error) => {
