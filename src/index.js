@@ -105,13 +105,18 @@ app.use('/notifications/:type', (req, res, next) => {
         type = "FRIEND_REQUEST_ACCEPTED"
         byId = node.recipient.id
         forId = node.actor.id
-
+        if (node.actor.doNotEmail) {
+          emailNotification = false
+        }
       } else {
         type = "FRIEND_REQUEST"
         byId = node.actor.id
         forId = node.recipient.id
         byHandle = node.recipient.handle
         toEmail = node.recipient.email
+        if (node.recipient.doNotEmail) {
+          emailNotification = false
+        }
       }
       break
     }
@@ -133,6 +138,10 @@ app.use('/notifications/:type', (req, res, next) => {
       let existingComment = node.project.comments.filter( (comment) => {
         return comment.author.id === byId
       })
+
+      if (node.project.creator.doNotEmail) {
+        emailNotification = false
+      }
 
       if (existingComment.length > 1) {
         emailNotification = false
