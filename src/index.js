@@ -65,6 +65,7 @@ app.use('/notifications/:type', (req, res, next) => {
         return comment.author.id === byId
       })
       console.log("existingComment", existingComment)
+      console.log("existingComment type", typeof existingComment)
       if (typeof existingComment !== undefined) {
         emailNotification = false
         sendNotification = false
