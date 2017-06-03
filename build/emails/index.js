@@ -34,6 +34,7 @@ function sendEmail(_ref) {
 
   var html = '';
   var subject = '';
+  console.log("type", type);
   switch (type) {
     case 'FRIEND_REQUEST':
       {

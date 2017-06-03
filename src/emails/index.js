@@ -11,6 +11,7 @@ export default function sendEmail({toEmail,byHandle,type, projectTitle, sessionI
 
   let html = ''
   let subject = ''
+  console.log("type", type)
   switch (type) {
     case 'FRIEND_REQUEST': {
       break
