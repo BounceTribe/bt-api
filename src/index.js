@@ -15,6 +15,12 @@ app.set('port', port)
 app.use(bodyParser.json())
 
 
+app.use('/artists', (req, res, next) => {
+  console.log('artists request received')
+  console.log("req", req.body )
+  res.send("Great!")
+})
+
 
 app.use('/notifications/:type', (req, res, next) => {
   let {data} = req.body

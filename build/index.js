@@ -28,6 +28,12 @@ app.set('port', port);
 
 app.use(_bodyParser2.default.json());
 
+app.use('/artists', function (req, res, next) {
+  console.log('artists request received');
+  console.log("req", req.body);
+  res.send("Great!");
+});
+
 app.use('/notifications/:type', function (req, res, next) {
   var data = req.body.data;
   var type = req.params.type;
