@@ -61,11 +61,9 @@ app.use('/notifications/:type', (req, res, next) => {
         type = 'PROJECT_FEEDBACK_RECEIVED'
         projectTitle = node.project.title
       }
-      console.log("comment node", node )
       let existingComment = node.project.comments.find( (comment) => {
         return comment.author.id === byId
       })
-      console.log("existingComment", existingComment )
 
       if (existingComment) {
         emailNotification = false
@@ -100,7 +98,7 @@ app.use('/notifications/:type', (req, res, next) => {
 
   }
 
-
+  console.log("emailNotification", emailNotification )
   if (emailNotification) {
     sendEmail({
       toEmail,
