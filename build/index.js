@@ -38,7 +38,8 @@ app.use('/notifications/:type', function (req, res, next) {
       byHandle = void 0,
       sessionId = void 0,
       projectTitle = void 0;
-  var emailNotification = false;
+  var emailNotification = true;
+  var sendNotification = true;
   var extra = '';
 
   switch (type) {
@@ -56,7 +57,6 @@ app.use('/notifications/:type', function (req, res, next) {
           forId = node.recipient.id;
           byHandle = node.recipient.handle;
           toEmail = node.recipient.email;
-          emailNotification = true;
         }
         break;
       }
@@ -82,8 +82,10 @@ app.use('/notifications/:type', function (req, res, next) {
           return comment.author.id === byId;
         });
         console.log("existingComment", existingComment);
-        if (typeof existingComment === 'undefined') {
-          emailNotification = true;
+
+        if (existingComment) {
+          emailNotification = false;
+          sendNotification = false;
         }
         break;
       }
@@ -103,12 +105,14 @@ app.use('/notifications/:type', function (req, res, next) {
       {}
   }
 
-  (0, _createNotification2.default)({
-    byId: byId,
-    forId: forId,
-    type: type,
-    extra: extra
-  });
+  if (sendNotification) {
+    (0, _createNotification2.default)({
+      byId: byId,
+      forId: forId,
+      type: type,
+      extra: extra
+    });
+  }
 
   if (emailNotification) {
     (0, _emails2.default)({

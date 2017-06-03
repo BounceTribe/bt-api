@@ -25,7 +25,8 @@ app.use('/notifications/:type', (req, res, next) => {
       byHandle,
       sessionId,
       projectTitle
-  let emailNotification = false
+  let emailNotification = true
+  let sendNotification = true
   let extra = ''
 
   switch (type) {
@@ -42,7 +43,6 @@ app.use('/notifications/:type', (req, res, next) => {
         forId = node.recipient.id
         byHandle = node.recipient.handle
         toEmail = node.recipient.email
-        emailNotification =  true
       }
       break
     }
@@ -66,8 +66,10 @@ app.use('/notifications/:type', (req, res, next) => {
         return comment.author.id === byId
       })
       console.log("existingComment", existingComment )
-      if (typeof existingComment === 'undefined') {
-        emailNotification = true
+
+      if (existingComment) {
+        emailNotification = false
+        sendNotification = false
       }
       break
     }
@@ -88,12 +90,16 @@ app.use('/notifications/:type', (req, res, next) => {
     }
   }
 
-  createNotification({
-    byId,
-    forId,
-    type,
-    extra
-  })
+  if (sendNotification) {
+    createNotification({
+      byId,
+      forId,
+      type,
+      extra
+    })
+
+  }
+
 
   if (emailNotification) {
     sendEmail({
