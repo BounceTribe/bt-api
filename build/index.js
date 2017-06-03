@@ -22,6 +22,10 @@ var _cors = require('cors');
 
 var _cors2 = _interopRequireDefault(_cors);
 
+var _spotifyWebApiNode = require('spotify-web-api-node');
+
+var _spotifyWebApiNode2 = _interopRequireDefault(_spotifyWebApiNode);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var app = (0, _express2.default)();
@@ -34,10 +38,61 @@ app.use((0, _cors2.default)());
 
 app.use(_bodyParser2.default.json());
 
+var spotify = new _spotifyWebApiNode2.default({
+  clientId: '6b96fc2eae0c494fb5b02514b70c436f',
+  clientSecret: process.env.spotifySecret
+});
+
+var expiration = Date.now();
+
+function refreshCredentials() {
+  return new Promise(function (resolve, reject) {
+    spotify.clientCredentialsGrant().then(function (resp) {
+      console.log(resp);
+      spotify.setAccessToken(resp.body['access_token']);
+      expiration = Date.now() + 3000000;
+      resolve();
+    }, function (error) {
+      console.log("error", error);
+    });
+  });
+}
+
+function searchArtists(query) {
+  return new Promise(function (resolve, reject) {
+    spotify.searchArtists(query).then(function (resp) {
+      console.log(resp);
+      var options = resp.body.artists.items.map(function (artist) {
+        return {
+          value: {
+            spotifyId: artist.id,
+            imageUrl: artist.images.length > 0 ? artist.images[0].url : '',
+            influenceId: false,
+            id: false
+          },
+          label: artist.name
+        };
+      });
+      console.log(options);
+      resolve({ options: options });
+    }, function (error) {
+      console.log("error", error);
+    });
+  });
+}
+
 app.use('/artists', function (req, res, next) {
-  console.log('artists request received');
-  console.log("req", req.body);
-  res.send("Great!");
+  if (expiration <= Date.now()) {
+    refreshCredentials().then(function () {
+      searchArtists(req.body.q).then(function (options) {
+        res.send(options);
+      });
+    });
+  } else {
+    searchArtists(req.body.q).then(function (options) {
+      res.send(options);
+    });
+  }
 });
 
 app.use('/notifications/:type', function (req, res, next) {

@@ -4,7 +4,7 @@ import bodyParser from 'body-parser'
 import createNotification from './createNotification'
 import sendEmail from './emails'
 import cors from 'cors'
-
+import Spotify from 'spotify-web-api-node'
 
 const app = express()
 
@@ -17,10 +17,73 @@ app.use(cors())
 app.use(bodyParser.json())
 
 
+const spotify = new Spotify({
+  clientId : '6b96fc2eae0c494fb5b02514b70c436f',
+  clientSecret : process.env.spotifySecret,
+})
+
+let expiration = Date.now()
+
+function refreshCredentials() {
+  return new Promise( (resolve, reject) => {
+    spotify.clientCredentialsGrant().then(
+      (resp) => {
+        console.log(resp)
+        spotify.setAccessToken(resp.body['access_token'])
+        expiration = Date.now() + 3000000
+        resolve()
+      },
+      (error) => {
+        console.log("error", error )
+      }
+    )
+  })
+}
+
+
+function searchArtists(query) {
+  return new Promise( (resolve, reject) => {
+    spotify.searchArtists(query).then(
+      (resp) => {
+        console.log(resp)
+        let options = resp.body.artists.items.map((artist) => {
+          return {
+            value: {
+              spotifyId: artist.id,
+              imageUrl: (artist.images.length > 0) ? artist.images[0].url : '',
+              influenceId: false,
+              id: false
+            },
+            label: artist.name
+          }
+        })
+        console.log(options)
+        resolve({options})
+      },
+      (error) => {
+        console.log("error", error)
+      }
+    )
+  })
+}
+
+
 app.use('/artists', (req, res, next) => {
-  console.log('artists request received')
-  console.log("req", req.body )
-  res.send("Great!")
+  if (expiration <= Date.now()) {
+    refreshCredentials().then(() => {
+      searchArtists(req.body.q).then(
+        (options) => {
+          res.send(options)
+        }
+      )
+    })
+  } else {
+    searchArtists(req.body.q).then(
+      (options) => {
+        res.send(options)
+      }
+    )
+  }
 })
 
 
