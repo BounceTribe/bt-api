@@ -20,7 +20,7 @@ let mjml = (byHandle, link, forHandle) => `
   </mjml>
 `
 
-export default function feedbackReceived(handle, link){
+export default function feedbackReceived(handle, link, forHandle){
   return`
   <!doctype html>
   <html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
@@ -146,7 +146,7 @@ export default function feedbackReceived(handle, link){
                           <table role="presentation" cellpadding="0" cellspacing="0" style="border-collapse:separate;" align="left" border="0">
                             <tbody>
                               <tr>
-                                <td style="border:none;border-radius:3px;color:white;cursor:auto;padding:16px 30px;" align="center" valign="middle" bgcolor="#9075F3"><a href="https://test.bouncetribe.com/${handle}/${link}" style="text-decoration:none;line-height:100%;background:#9075F3;color:white;font-family:Helvetica, Arial;font-size:15px;font-weight:normal;text-transform:none;margin:0px;"
+                                <td style="border:none;border-radius:3px;color:white;cursor:auto;padding:16px 30px;" align="center" valign="middle" bgcolor="#9075F3"><a href="https://test.bouncetribe.com/${forHandle}/${link}" style="text-decoration:none;line-height:100%;background:#9075F3;color:white;font-family:Helvetica, Arial;font-size:15px;font-weight:normal;text-transform:none;margin:0px;"
                                     target="_blank">View Feedback</a></td>
                               </tr>
                             </tbody>
