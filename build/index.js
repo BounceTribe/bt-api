@@ -82,14 +82,16 @@ function searchArtists(query) {
 }
 
 app.use('/artists', function (req, res, next) {
+  var query = req.body.query;
+
   if (expiration <= Date.now()) {
     refreshCredentials().then(function () {
-      searchArtists(req.body.q).then(function (options) {
+      searchArtists(query).then(function (options) {
         res.send(options);
       });
     });
   } else {
-    searchArtists(req.body.q).then(function (options) {
+    searchArtists(query).then(function (options) {
       res.send(options);
     });
   }

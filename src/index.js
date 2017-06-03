@@ -69,16 +69,17 @@ function searchArtists(query) {
 
 
 app.use('/artists', (req, res, next) => {
+  let {query} = req.body
   if (expiration <= Date.now()) {
     refreshCredentials().then(() => {
-      searchArtists(req.body.q).then(
+      searchArtists(query).then(
         (options) => {
           res.send(options)
         }
       )
     })
   } else {
-    searchArtists(req.body.q).then(
+    searchArtists(query).then(
       (options) => {
         res.send(options)
       }
