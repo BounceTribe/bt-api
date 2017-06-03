@@ -77,9 +77,11 @@ app.use('/notifications/:type', function (req, res, next) {
           type = 'PROJECT_FEEDBACK_RECEIVED';
           projectTitle = _node.project.title;
         }
+        console.log("comment node", _node);
         var existingComment = _node.project.comments.find(function (comment) {
           return comment.author.id === byId;
         });
+        console.log("existingComment", existingComment);
         if (typeof existingComment === 'undefined') {
           emailNotification = true;
         }
