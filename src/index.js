@@ -61,12 +61,12 @@ app.use('/notifications/:type', (req, res, next) => {
         type = 'PROJECT_FEEDBACK_RECEIVED'
         projectTitle = node.project.title
       }
-      let existingComment = node.project.comments.find( (comment) => {
+      let existingComment = node.project.comments.filter( (comment) => {
         return comment.author.id === byId
       })
       console.log("existingComment", existingComment)
-      console.log("existingComment type", typeof existingComment)
-      if (typeof existingComment !== undefined) {
+
+      if (existingComment.length > 1) {
         emailNotification = false
         sendNotification = false
       }

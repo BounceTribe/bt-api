@@ -1,7 +1,5 @@
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
-
 require('babel-polyfill');
 
 var _express = require('express');
@@ -79,12 +77,12 @@ app.use('/notifications/:type', function (req, res, next) {
           type = 'PROJECT_FEEDBACK_RECEIVED';
           projectTitle = _node.project.title;
         }
-        var existingComment = _node.project.comments.find(function (comment) {
+        var existingComment = _node.project.comments.filter(function (comment) {
           return comment.author.id === byId;
         });
         console.log("existingComment", existingComment);
-        console.log("existingComment type", typeof existingComment === 'undefined' ? 'undefined' : _typeof(existingComment));
-        if ((typeof existingComment === 'undefined' ? 'undefined' : _typeof(existingComment)) !== undefined) {
+
+        if (existingComment.length > 1) {
           emailNotification = false;
           sendNotification = false;
         }
