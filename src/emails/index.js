@@ -14,6 +14,8 @@ export default function sendEmail({toEmail,byHandle,type, projectTitle, sessionI
   console.log("type", type)
   switch (type) {
     case 'FRIEND_REQUEST': {
+      html = friendRequestAccepted(byHandle)
+      subject = 'Friend Request Accepted'
       break
     }
     case 'FRIEND_REQUEST_ACCEPTED': {

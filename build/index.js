@@ -1,5 +1,7 @@
 'use strict';
 
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
 require('babel-polyfill');
 
 var _express = require('express');
@@ -80,8 +82,8 @@ app.use('/notifications/:type', function (req, res, next) {
         var existingComment = _node.project.comments.find(function (comment) {
           return comment.author.id === byId;
         });
-
-        if (existingComment) {
+        console.log(existingComment);
+        if ((typeof existingComment === 'undefined' ? 'undefined' : _typeof(existingComment)) !== undefined) {
           emailNotification = false;
           sendNotification = false;
         }

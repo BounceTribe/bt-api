@@ -38,6 +38,8 @@ function sendEmail(_ref) {
   switch (type) {
     case 'FRIEND_REQUEST':
       {
+        html = (0, _friendRequestAccepted2.default)(byHandle);
+        subject = 'Friend Request Accepted';
         break;
       }
     case 'FRIEND_REQUEST_ACCEPTED':
