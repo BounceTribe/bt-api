@@ -28,7 +28,7 @@ export default function sendEmail({toEmail,byHandle,type, projectTitle, sessionI
       break
     }
     case 'SESSION_FEEDBACK_RECEIVED': {
-      html = feedbackReceived(byHandle, sessionId, forHandle)
+      html = feedbackReceived(byHandle, `session/${sessionId}/mine`, forHandle)
       subject = 'Feedback Received'
       break
     }

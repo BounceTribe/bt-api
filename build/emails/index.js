@@ -56,7 +56,7 @@ function sendEmail(_ref) {
       }
     case 'SESSION_FEEDBACK_RECEIVED':
       {
-        html = (0, _feedbackReceived2.default)(byHandle, sessionId, forHandle);
+        html = (0, _feedbackReceived2.default)(byHandle, 'session/' + sessionId + '/mine', forHandle);
         subject = 'Feedback Received';
         break;
       }
