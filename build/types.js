@@ -115,7 +115,7 @@ var queryType = new _graphql.GraphQLObjectType({
         }
       },
       resolve: function () {
-        var _ref = _asyncToGenerator(regeneratorRuntime.mark(function _callee(src, _ref2) {
+        var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(src, _ref2) {
           var orderBy = _ref2.orderBy,
               number = _ref2.number,
               range = _ref2.range;
@@ -183,7 +183,7 @@ var queryType = new _graphql.GraphQLObjectType({
     mostRecentSummary: {
       type: _graphql.GraphQLString,
       resolve: function () {
-        var _ref3 = _asyncToGenerator(regeneratorRuntime.mark(function _callee2(src, args) {
+        var _ref3 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(src, args) {
           var summary;
           return regeneratorRuntime.wrap(function _callee2$(_context2) {
             while (1) {

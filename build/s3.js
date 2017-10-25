@@ -8,7 +8,7 @@ exports.compileReports = exports.getAllReports = exports.fetchReport = undefined
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 var fetchReport = exports.fetchReport = function () {
-  var _ref = _asyncToGenerator(regeneratorRuntime.mark(function _callee(file) {
+  var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(file) {
     return regeneratorRuntime.wrap(function _callee$(_context) {
       while (1) {
         switch (_context.prev = _context.next) {
@@ -39,7 +39,7 @@ var fetchReport = exports.fetchReport = function () {
 }();
 
 var getAllReports = exports.getAllReports = function () {
-  var _ref2 = _asyncToGenerator(regeneratorRuntime.mark(function _callee2() {
+  var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2() {
     var passwordFail, topLogins, usernameFail;
     return regeneratorRuntime.wrap(function _callee2$(_context2) {
       while (1) {
@@ -83,7 +83,7 @@ var getAllReports = exports.getAllReports = function () {
 }();
 
 var compileReports = exports.compileReports = function () {
-  var _ref3 = _asyncToGenerator(regeneratorRuntime.mark(function _callee3() {
+  var _ref3 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3() {
     var compiled, allReports, final;
     return regeneratorRuntime.wrap(function _callee3$(_context3) {
       while (1) {

@@ -13,6 +13,10 @@ var _feedbackReceived = require('./feedbackReceived');
 
 var _feedbackReceived2 = _interopRequireDefault(_feedbackReceived);
 
+var _invitationReceived = require('./invitationReceived');
+
+var _invitationReceived2 = _interopRequireDefault(_invitationReceived);
+
 var _friendRequestAccepted = require('./friendRequestAccepted');
 
 var _friendRequestAccepted2 = _interopRequireDefault(_friendRequestAccepted);
@@ -30,7 +34,8 @@ function sendEmail(_ref) {
       type = _ref.type,
       projectTitle = _ref.projectTitle,
       sessionId = _ref.sessionId,
-      forHandle = _ref.forHandle;
+      forHandle = _ref.forHandle,
+      urlCode = _ref.urlCode;
 
 
   var html = '';
@@ -58,6 +63,12 @@ function sendEmail(_ref) {
       {
         html = (0, _feedbackReceived2.default)(byHandle, 'session/' + sessionId + '/mine', forHandle);
         subject = 'Feedback Received';
+        break;
+      }
+    case 'INVITATION_RECEIVED':
+      {
+        html = (0, _invitationReceived2.default)(byHandle, urlCode);
+        subject = 'BounceTribe Invitation Received';
         break;
       }
     case 'FB_FRIEND_JOINED':

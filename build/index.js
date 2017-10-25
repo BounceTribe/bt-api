@@ -94,6 +94,18 @@ app.use('/artists', function (req, res, next) {
   }
 });
 
+app.use('/email', function (req, res, next) {
+  var _req$body$query = req.body.query,
+      toEmail = _req$body$query.toEmail,
+      byHandle = _req$body$query.byHandle;
+
+  var type = 'INVITATION_RECEIVED';
+  var urlCode = '';
+  console.log('email Invitiation to:', toEmail);
+  (0, _emails2.default)({ toEmail: toEmail, byHandle: byHandle, type: type, urlCode: urlCode });
+  res.send();
+});
+
 app.use('/notifications/:type', function (req, res, next) {
   var data = req.body.data;
   var type = req.params.type;
@@ -105,9 +117,10 @@ app.use('/notifications/:type', function (req, res, next) {
       sessionId = void 0,
       projectTitle = void 0,
       forHandle = void 0;
-  var emailNotification = true;
+  var emailNotification = false;
   var sendNotification = true;
   var extra = '';
+  var urlCode = '';
 
   switch (type) {
     case 'FRIENDS':
@@ -118,8 +131,8 @@ app.use('/notifications/:type', function (req, res, next) {
           type = "FRIEND_REQUEST_ACCEPTED";
           byId = node.recipient.id;
           forId = node.actor.id;
-          if (node.actor.doNotEmail) {
-            emailNotification = false;
+          if (!node.actor.doNotEmail) {
+            emailNotification = true;
           }
         } else {
           type = "FRIEND_REQUEST";
@@ -127,8 +140,8 @@ app.use('/notifications/:type', function (req, res, next) {
           forId = node.recipient.id;
           byHandle = node.recipient.handle;
           toEmail = node.recipient.email;
-          if (node.recipient.doNotEmail) {
-            emailNotification = false;
+          if (!node.recipient.doNotEmail) {
+            emailNotification = true;
           }
         }
         break;
@@ -155,12 +168,11 @@ app.use('/notifications/:type', function (req, res, next) {
           return comment.author.id === byId;
         });
 
-        if (_node.project.creator.doNotEmail) {
-          emailNotification = false;
+        if (!_node.project.creator.doNotEmail) {
+          emailNotification = true;
         }
 
         if (existingComment.length > 1) {
-          emailNotification = false;
           sendNotification = false;
         }
         break;
@@ -175,6 +187,25 @@ app.use('/notifications/:type', function (req, res, next) {
       }
     case 'BOUNCED':
       {
+        var _node2 = data.Bounce.node;
+
+        console.log('BOUNCED!', _node2);
+        byId = _node2.bouncer.id;
+        forId = _node2.project.creator.id;
+        toEmail = _node2.project.creator.email;
+        forHandle = _node2.project.creator.handle;
+        byHandle = _node2.bouncer.handle;
+        extra = 'projectId: "' + _node2.project.id + '"';
+        type = 'BOUNCED';
+        urlCode = '';
+        if (!_node2.project.creator.doNotEmail) {
+          emailNotification = true;
+        }
+        // if bounce deleted?
+        // if (existingComment.length > 1) {
+        //   emailNotification = false
+        //   sendNotification = false
+        // }
         break;
       }
     default:
@@ -197,7 +228,8 @@ app.use('/notifications/:type', function (req, res, next) {
       type: type,
       projectTitle: projectTitle,
       sessionId: sessionId,
-      forHandle: forHandle
+      forHandle: forHandle,
+      urlCode: urlCode
     });
   }
 
