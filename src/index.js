@@ -152,7 +152,7 @@ app.use('/notifications/:type', (req, res, next) => {
       }
 
       if (existingComment.length > 1) {
-        sendNotification = false
+        // sendNotification = false
       }
       break
     }
