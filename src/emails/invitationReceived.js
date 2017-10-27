@@ -29,7 +29,7 @@ let mjml = (byHandle) => `
     </mj-body>
   </mjml>
 `
-export default function invitationReceived() {
+export default function invitationReceived(byHandle) {
   return mjml2html(`
 
     <mjml>
