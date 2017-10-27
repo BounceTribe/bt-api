@@ -53,7 +53,7 @@ export default function friendRequestAccepted(handle){
     margin: 0;
     padding: 0;
     -webkit-text-size-adjust: 100%;
-    -ms-text-size-adjust: 100%;
+    // -ms-text-size-adjust: 100%;
   }
 
   table,
@@ -138,7 +138,7 @@ export default function friendRequestAccepted(handle){
                   </tr>
                   <tr>
                     <td style="word-wrap:break-word;font-size:0px;padding:10px 25px;padding-bottom:20px;" align="left">
-                      <div class="" style="cursor:auto;color:#777777;font-family:helvetica;font-size:16px;line-height:22px;text-align:left;">${username} has joined your tribe and wants to hear more of your music.</div>
+                      <div class="" style="cursor:auto;color:#777777;font-family:helvetica;font-size:16px;line-height:22px;text-align:left;">${handle} has joined your tribe and wants to hear more of your music.</div>
                     </td>
                   </tr>
                   <tr>
