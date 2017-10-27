@@ -30,7 +30,34 @@ let mjml = (byHandle) => `
   </mjml>
 `
 export default function invitationReceived() {
-  return mjml2html(mjml)
+  return mjml2html(`
+
+    <mjml>
+      <mj-body>
+        <mj-container>
+          <mj-section>
+            <mj-column>
+
+              <mj-image width="130" padding-bottom="20px" src="http://bouncetribe.com/wp-content/uploads/2016/03/Logo-500.png" />
+
+              <mj-text font-size="24px" font-weight="bold" color="#555555" font-family="helvetica" align="center" line-height="40px" padding-bottom="10px">${byHandle} has invited you to join their tribe! </mj-text>
+
+              <mj-text font-size="16px" color="#777777" font-family="helvetica" align="center" padding-bottom="20px"> Your friend is using BounceTribe to share their music and wants to collaborate with you. </mj-text>
+
+              <mj-button inner-padding="16px 30px" font-size="15px" font-weight="bold" font-family="Helvetica, Arial" align="center" background-color="#9075F3" color="white">
+                Accept Invitation
+              </mj-button>
+
+              <mj-divider border-width="1px" border-style="dashed" border-color="lightgrey" />
+
+              <mj-text font-size="13px" color="#999999" font-family="helvetica" align="center" padding-bottom="20px"> Use BounceTribe to share music you're working on and find your musical mentors. </mj-text>
+
+            </mj-column>
+          </mj-section>
+        </mj-container>
+      </mj-body>
+    </mjml>
+  `)
 }
 //
 // export default function invitationReceived(byHandle, urlCode){
