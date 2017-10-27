@@ -30,7 +30,7 @@ let mjml = (byHandle) => `
   </mjml>
 `
 export default function invitationReceived(byHandle) {
-  return mjml2html(`
+  let ret =  mjml2html(`
 
     <mjml>
       <mj-body>
@@ -58,6 +58,8 @@ export default function invitationReceived(byHandle) {
       </mj-body>
     </mjml>
   `)
+  console.log('html', ret)
+  return ret
 }
 //
 // export default function invitationReceived(byHandle, urlCode){
