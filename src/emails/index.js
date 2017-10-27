@@ -35,6 +35,7 @@ export default function sendEmail({toEmail,byHandle,type, projectTitle, sessionI
     }
     case 'INVITATION_RECEIVED':{
       html = invitationReceived(byHandle, urlCode)
+      console.log('invitationReceived(byHandle, urlCode)', invitationReceived(byHandle, urlCode));
       subject = 'BounceTribe Invitation Received'
       break
     }

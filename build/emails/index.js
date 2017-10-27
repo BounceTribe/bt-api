@@ -68,6 +68,7 @@ function sendEmail(_ref) {
     case 'INVITATION_RECEIVED':
       {
         html = (0, _invitationReceived2.default)(byHandle, urlCode);
+        console.log('invitationReceived(byHandle, urlCode)', (0, _invitationReceived2.default)(byHandle, urlCode));
         subject = 'BounceTribe Invitation Received';
         break;
       }
