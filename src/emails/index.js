@@ -2,13 +2,15 @@ import Mailgun from 'mailgun-js'
 import feedbackReceived from './feedbackReceived'
 import invitationReceived from './invitationReceived'
 import friendRequestAccepted from './friendRequestAccepted'
-
-
+import projectBounced from './projectBounced'
+//
+//
+// console.log(projectBounced('USER 1111111111jake', 'USER EROGNUSEIURGHWIUERGchris', 'PROJECT LIIIINKS'));
 const domain = 'mail.bouncetribe.com'
 const {mailgunKey: apiKey} = process.env
 const mailgun = new Mailgun({apiKey, domain})
 
-export default function sendEmail({toEmail,byHandle,type, projectTitle, sessionId, forHandle, urlCode}) {
+export default function sendEmail({toEmail, byHandle,type, projectTitle, sessionId, forHandle, urlCode}) {
 
   let html = ''
   let subject = ''
@@ -48,6 +50,9 @@ export default function sendEmail({toEmail,byHandle,type, projectTitle, sessionI
 
     }
     case 'BOUNCED': {
+      html = projectBounced(byHandle, urlCode)
+      console.log('projectBounced(byHandle, urlCode)', projectBounced(byHandle, urlCode));
+      subject = 'BounceTribe Invitation Received'
       break
 
     }
