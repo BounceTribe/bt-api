@@ -1,8 +1,9 @@
 import { mjml2html } from 'mjml'
-import {btLogo, unSub} from './common'
+import { btLogo, unSub } from './common'
 
 console.log('unsub', unSub);
 export default function projectBounced(byHandle, forHandle, projectTitle){
+  console.log('byHandle, forHandle, projectTitle', byHandle, forHandle, projectTitle);
   return mjml2html(`
     <mjml>
       <mj-body>

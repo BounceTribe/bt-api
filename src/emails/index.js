@@ -3,6 +3,7 @@ import feedbackReceived from './feedbackReceived'
 import invitationReceived from './invitationReceived'
 import friendRequestAccepted from './friendRequestAccepted'
 import projectBounced from './projectBounced'
+import {} from 'dotenv/config'
 //
 //
 // console.log(projectBounced('USER 1111111111jake', 'USER EROGNUSEIURGHWIUERGchris', 'PROJECT LIIIINKS'));
@@ -51,7 +52,7 @@ export default function sendEmail({toEmail, byHandle,type, projectTitle, session
     }
     case 'BOUNCED': {
       html = projectBounced(byHandle, forHandle, projectTitle)
-      console.log('projectBounced(byHandle, forHandle, title)', projectBounced(byHandle, forHandle, projectTitle));
+      console.log('html', html);
       subject = 'Project Bounced'
       break
     }
@@ -61,10 +62,11 @@ export default function sendEmail({toEmail, byHandle,type, projectTitle, session
   }
 
   if (html) {
+    console.log('yeshtml\n', html)
     mailgun.messages().send({
        from: "BounceTribe <hello@bouncetribe.com>",
        to: toEmail,
-       html,
+       html: html,
        subject
      }, (error, body) => {
       if (error) {
