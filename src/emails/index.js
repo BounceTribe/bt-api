@@ -3,7 +3,7 @@ import feedbackReceived from './feedbackReceived'
 import invitationReceived from './invitationReceived'
 import friendRequestAccepted from './friendRequestAccepted'
 import projectBounced from './projectBounced'
-// import {} from 'dotenv/config'
+import {} from 'dotenv/config'
 //
 //
 // console.log(projectBounced('USER 1111111111jake', 'USER EROGNUSEIURGHWIUERGchris', 'PROJECT LIIIINKS'));

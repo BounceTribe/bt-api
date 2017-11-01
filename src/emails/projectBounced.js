@@ -29,5 +29,5 @@ export default function projectBounced(byHandle, forHandle, projectTitle){
         </mj-container>
       </mj-body>
     </mjml>
-  `)
+  `).html
 }

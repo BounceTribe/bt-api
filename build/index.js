@@ -235,7 +235,7 @@ app.use('/notifications/:type', function (req, res, next) {
 
   next();
 });
-(0, _emails2.default)({ type: "BOUNCED",
+(0, _emails2.default)({ type: "BOUCED",
   forHandle: 'subliminal_lime',
   toEmail: "holesinabarrel@gmail.com",
   byHandle: "someoneelse",

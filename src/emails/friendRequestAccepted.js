@@ -1,3 +1,5 @@
+import { mjml2html } from 'mjml'
+
 let mjml = (handle) => `
   <mjml>
     <mj-body>
