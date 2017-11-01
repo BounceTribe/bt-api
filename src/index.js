@@ -109,58 +109,36 @@ app.use('/notifications/:type', (req, res, next) => {
     case 'FRIENDS': {
       let {node} = data.FriendRequest
       if (node.accepted) {
-        type = "FRIEND_REQUEST_ACCEPTED"
+        type = "TRIBE_REQUEST_ACCEPTED"
         byId = node.recipient.id
+        byHandle = node.actor.handle
         forId = node.actor.id
-        if (!node.actor.doNotEmail) {
-          emailNotification = true
-        }
+        toEmail = node.actor.email
+        if (!node.actor.doNotEmailTA) emailNotification = true
+
       } else {
-        type = "FRIEND_REQUEST"
+        type = "TRIBE_REQUEST"
         byId = node.actor.id
         forId = node.recipient.id
         byHandle = node.recipient.handle
         toEmail = node.recipient.email
-        if (!node.recipient.doNotEmail) {
-          emailNotification = true
-        }
+        if (!node.recipient.doNotEmailTR) emailNotification = true
       }
       break
     }
     case 'COMMENT': {
       let {node} = data.Comment
-      byId = node.author.id
-      forId = node.project.creator.id
       toEmail = node.project.creator.email
       forHandle = node.project.creator.handle
       byHandle = node.author.handle
-      if (node.session) {
-        extra = `sessionId: "${node.session.id}"`
-        type = 'SESSION_FEEDBACK_RECEIVED'
-        sessionId = node.session.id
-      } else if (node.project) {
-        extra = `projectId: "${node.project.id}"`
-        type = 'PROJECT_FEEDBACK_RECEIVED'
-        projectTitle = node.project.title
-      }
-      let existingComment = node.project.comments.filter( (comment) => {
-        return comment.author.id === byId
-      })
-
-      if (!node.project.creator.doNotEmail) {
+      extra = `projectId: "${node.project.id}"`
+      type = 'PROJECT_FEEDBACK_RECEIVED'
+      projectTitle = node.project.title
+      let existingComment = node.project.comments.filter( (comment) =>
+        comment.author.id === byId
+      )
+      if (!node.project.creator.doNotEmail && existingComment.length > 1)
         emailNotification = true
-      }
-
-      if (existingComment.length > 1) {
-        // sendNotification = false
-      }
-      break
-    }
-    case 'FB_FRIEND_JOINED': {
-      break
-
-    }
-    case 'MESSAGE': {
       break
 
     }
@@ -215,11 +193,12 @@ app.use('/notifications/:type', (req, res, next) => {
 
   next()
 })
-// sendEmail({type: "BOUCED",
-//   forHandle: 'subliminal_lime',
-//   toEmail: "holesinabarrel@gmail.com",
-//   byHandle: "someoneelse",
-//   projectTitle: "Tree Heart"})
+console.log('etbwerqvqewrwgefwrtegwertsd');
+sendEmail({type: "TRIBE_REQUESET_ACCEPTED",
+  forHandle: 'subliminal_lime',
+  toEmail: "holesinabarrel@gmail.com",
+  byHandle: "someoneelse",
+  projectTitle: "Tree Heart"})
 const server = app.listen(app.get('port'), ()=>{
   console.log(`Server is running at port ${app.get('port')}`)
 })

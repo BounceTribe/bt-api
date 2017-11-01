@@ -25,9 +25,10 @@ var _projectBounced = require('./projectBounced');
 
 var _projectBounced2 = _interopRequireDefault(_projectBounced);
 
+require('dotenv/config');
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-// import {} from 'dotenv/config'
 //
 //
 // console.log(projectBounced('USER 1111111111jake', 'USER EROGNUSEIURGHWIUERGchris', 'PROJECT LIIIINKS'));
@@ -36,15 +37,15 @@ var apiKey = process.env.mailgunKey;
 
 var mailgun = new _mailgunJs2.default({ apiKey: apiKey, domain: domain });
 
-function sendEmail(_ref) {
-  var toEmail = _ref.toEmail,
-      byHandle = _ref.byHandle,
-      type = _ref.type,
-      projectTitle = _ref.projectTitle,
-      sessionId = _ref.sessionId,
-      forHandle = _ref.forHandle,
-      urlCode = _ref.urlCode;
-
+function sendEmail(props) {
+  console.log('props', props);
+  var toEmail = props.toEmail,
+      byHandle = props.byHandle,
+      type = props.type,
+      projectTitle = props.projectTitle,
+      sessionId = props.sessionId,
+      forHandle = props.forHandle,
+      urlCode = props.urlCode;
 
   var html = '';
   var subject = '';
