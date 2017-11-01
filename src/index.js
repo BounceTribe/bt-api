@@ -166,16 +166,16 @@ app.use('/notifications/:type', (req, res, next) => {
     }
     case 'BOUNCED': {
       let {node} = data.Bounce
-      console.log('BOUNCED!', node)
+      let {creator} = node.project
+      console.log('BOUNCED!', node, creator)
       byId = node.bouncer.id
-      forId = node.project.creator.id
-      toEmail = node.project.creator.email
-      forHandle = node.project.creator.handle
+      forId = creator.id
+      toEmail = creator.email
+      forHandle = creator.handle
       byHandle = node.bouncer.handle
       extra = `projectId: "${node.project.id}"`
       type = 'BOUNCED'
-      urlCode = ''
-      if (!node.project.creator.doNotEmail) {
+      if (!creator.doNotEmailPB) {
         emailNotification = true
       }
       // if bounce deleted?

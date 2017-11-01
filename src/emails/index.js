@@ -50,11 +50,10 @@ export default function sendEmail({toEmail, byHandle,type, projectTitle, session
 
     }
     case 'BOUNCED': {
-      html = projectBounced(byHandle, urlCode)
-      console.log('projectBounced(byHandle, urlCode)', projectBounced(byHandle, urlCode));
-      subject = 'BounceTribe Invitation Received'
+      html = projectBounced(byHandle, forHandle, projectTitle)
+      console.log('projectBounced(byHandle, forHandle, title)', projectBounced(byHandle, forHandle, projectTitle));
+      subject = 'Project Bounced'
       break
-
     }
     default: {
 
