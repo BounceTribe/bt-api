@@ -25,6 +25,8 @@ var _projectBounced = require('./projectBounced');
 
 var _projectBounced2 = _interopRequireDefault(_projectBounced);
 
+require('dotenv/config');
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 //
@@ -90,7 +92,7 @@ function sendEmail(_ref) {
     case 'BOUNCED':
       {
         html = (0, _projectBounced2.default)(byHandle, forHandle, projectTitle);
-        console.log('projectBounced(byHandle, forHandle, title)', (0, _projectBounced2.default)(byHandle, forHandle, projectTitle));
+        console.log('html', html);
         subject = 'Project Bounced';
         break;
       }
@@ -99,6 +101,7 @@ function sendEmail(_ref) {
   }
 
   if (html) {
+    console.log('yeshtml\n', html);
     mailgun.messages().send({
       from: "BounceTribe <hello@bouncetribe.com>",
       to: toEmail,
