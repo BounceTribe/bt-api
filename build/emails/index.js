@@ -25,10 +25,9 @@ var _projectBounced = require('./projectBounced');
 
 var _projectBounced2 = _interopRequireDefault(_projectBounced);
 
-require('dotenv/config');
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+// import {} from 'dotenv/config'
 //
 //
 // console.log(projectBounced('USER 1111111111jake', 'USER EROGNUSEIURGHWIUERGchris', 'PROJECT LIIIINKS'));
