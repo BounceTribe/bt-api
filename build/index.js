@@ -235,11 +235,11 @@ app.use('/notifications/:type', function (req, res, next) {
 
   next();
 });
-(0, _emails2.default)({ type: "BOUCED",
-  forHandle: 'subliminal_lime',
-  toEmail: "holesinabarrel@gmail.com",
-  byHandle: "someoneelse",
-  projectTitle: "Tree Heart" });
+// sendEmail({type: "BOUCED",
+//   forHandle: 'subliminal_lime',
+//   toEmail: "holesinabarrel@gmail.com",
+//   byHandle: "someoneelse",
+//   projectTitle: "Tree Heart"})
 var server = app.listen(app.get('port'), function () {
   console.log('Server is running at port ' + app.get('port'));
 });
