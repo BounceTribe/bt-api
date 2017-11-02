@@ -25,13 +25,13 @@ var _projectBounced = require('./projectBounced');
 
 var _projectBounced2 = _interopRequireDefault(_projectBounced);
 
-require('dotenv/config');
-
 var _createHtml = require('./createHtml');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var mailDomain = 'mail.bouncetribe.com';
+// import {} from 'dotenv/config'
+
 var siteDomain = 'test.bouncetribe.com';
 var apiKey = process.env.mailgunKey;
 
