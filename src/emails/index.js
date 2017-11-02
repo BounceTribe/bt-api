@@ -1,25 +1,14 @@
 import Mailgun from 'mailgun-js'
-import feedbackReceived from './feedbackReceived'
-import invitationReceived from './invitationReceived'
-import friendRequestAccepted from './friendRequestAccepted'
-import projectBounced from './projectBounced'
-// import {} from 'dotenv/config'
+import {} from 'dotenv/config'
 import {createHtml} from './createHtml'
-//
-//
-// console.log(projectBounced('USER 1111111111jake', 'USER EROGNUSEIURGHWIUERGchris', 'PROJECT LIIIINKS'));
-const siteDomain = 'test.bouncetribe.com'
+
+const siteDomain = 'https://test.bouncetribe.com'
 const domain = 'mail.bouncetribe.com'
 const {mailgunKey: apiKey} = process.env
 const mailgun = new Mailgun({apiKey, domain})
 
 export default function sendEmail({toEmail, byHandle, type, projectTitle, sessionId, forHandle, urlCode}) {
-  let headline
-  let mainText
-  let imgMainHref
-  let imgMainSrc
-  let html = ''
-  let subject = ''
+  let headline, mainText, imgMainHref, imgMainSrc, html, subject
   switch (type) {
 
     case 'TRIBE_REQUEST': {
@@ -68,14 +57,15 @@ export default function sendEmail({toEmail, byHandle, type, projectTitle, sessio
     }
 
     default: {
-      console.log('unknown email type', props)
+      console.log('unknown email type')
     }
   }
 
-    let generatedHtml = createHtml({headline, mainText, imgMainHref, imgMainSrc})
-    html = generatedHtml.html
+  let generatedHtml = createHtml({headline, mainText, imgMainHref, imgMainSrc})
+
+  html = generatedHtml.html
+
   if (html) {
-    console.log('yeshtml\n', html)
     mailgun.messages().send({
        from: "BounceTribe <hello@bouncetribe.com>",
        to: toEmail,
@@ -83,9 +73,9 @@ export default function sendEmail({toEmail, byHandle, type, projectTitle, sessio
        subject
      }, (error, body) => {
       if (error) {
-        console.log(error)
+        console.log('email error:', error)
       } else {
-        console.log('eb', error, body);
+        console.log('mailgun result:', body);
       }
 
     })

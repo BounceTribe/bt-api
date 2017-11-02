@@ -137,7 +137,7 @@ app.use('/notifications/:type', (req, res, next) => {
       let existingComment = node.project.comments.filter( (comment) =>
         comment.author.id === byId
       )
-      if (!node.project.creator.doNotEmail && existingComment.length > 1)
+      if (!node.project.creator.doNotEmailPR && existingComment.length > 1)
         emailNotification = true
       break
 
@@ -145,7 +145,6 @@ app.use('/notifications/:type', (req, res, next) => {
     case 'BOUNCED': {
       let {node} = data.Bounce
       let {creator} = node.project
-      console.log('BOUNCED!', node, creator)
       byId = node.bouncer.id
       forId = creator.id
       toEmail = creator.email
@@ -153,9 +152,8 @@ app.use('/notifications/:type', (req, res, next) => {
       byHandle = node.bouncer.handle
       extra = `projectId: "${node.project.id}"`
       type = 'BOUNCED'
-      if (!creator.doNotEmailPB) {
-        emailNotification = true
-      }
+      if (!creator.doNotEmailPB) emailNotification = true
+
       // if bounce deleted?
       // if (existingComment.length > 1) {
       //   emailNotification = false
@@ -193,12 +191,11 @@ app.use('/notifications/:type', (req, res, next) => {
 
   next()
 })
-// console.log('etbwerqvqewrwgefwrtegwertsd');
-sendEmail({type: "BOUNCED",
-  forHandle: 'subliminal_lime',
-  toEmail: "holesinabarrel@gmail.com",
-  byHandle: "someoneelse",
-  projectTitle: "Tree Heart"})
+// sendEmail({type: "BOUNCED",
+//   forHandle: 'subliminal_lime',
+//   toEmail: "holesinabarrel@gmail.com",
+//   byHandle: "someoneelse",
+//   projectTitle: "tree heart"})
 const server = app.listen(app.get('port'), ()=>{
   console.log(`Server is running at port ${app.get('port')}`)
 })

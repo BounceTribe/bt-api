@@ -9,32 +9,13 @@ var _mailgunJs = require('mailgun-js');
 
 var _mailgunJs2 = _interopRequireDefault(_mailgunJs);
 
-var _feedbackReceived = require('./feedbackReceived');
-
-var _feedbackReceived2 = _interopRequireDefault(_feedbackReceived);
-
-var _invitationReceived = require('./invitationReceived');
-
-var _invitationReceived2 = _interopRequireDefault(_invitationReceived);
-
-var _friendRequestAccepted = require('./friendRequestAccepted');
-
-var _friendRequestAccepted2 = _interopRequireDefault(_friendRequestAccepted);
-
-var _projectBounced = require('./projectBounced');
-
-var _projectBounced2 = _interopRequireDefault(_projectBounced);
+require('dotenv/config');
 
 var _createHtml = require('./createHtml');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-//
-//
-// console.log(projectBounced('USER 1111111111jake', 'USER EROGNUSEIURGHWIUERGchris', 'PROJECT LIIIINKS'));
-var siteDomain = 'test.bouncetribe.com';
-// import {} from 'dotenv/config'
-
+var siteDomain = 'https://test.bouncetribe.com';
 var domain = 'mail.bouncetribe.com';
 var apiKey = process.env.mailgunKey;
 
@@ -49,12 +30,12 @@ function sendEmail(_ref) {
       forHandle = _ref.forHandle,
       urlCode = _ref.urlCode;
 
-  var headline = void 0;
-  var mainText = void 0;
-  var imgMainHref = void 0;
-  var imgMainSrc = void 0;
-  var html = '';
-  var subject = '';
+  var headline = void 0,
+      mainText = void 0,
+      imgMainHref = void 0,
+      imgMainSrc = void 0,
+      html = void 0,
+      subject = void 0;
   switch (type) {
 
     case 'TRIBE_REQUEST':
@@ -109,14 +90,15 @@ function sendEmail(_ref) {
 
     default:
       {
-        console.log('unknown email type', props);
+        console.log('unknown email type');
       }
   }
 
   var generatedHtml = (0, _createHtml.createHtml)({ headline: headline, mainText: mainText, imgMainHref: imgMainHref, imgMainSrc: imgMainSrc });
+
   html = generatedHtml.html;
+
   if (html) {
-    console.log('yeshtml\n', html);
     mailgun.messages().send({
       from: "BounceTribe <hello@bouncetribe.com>",
       to: toEmail,
@@ -124,9 +106,9 @@ function sendEmail(_ref) {
       subject: subject
     }, function (error, body) {
       if (error) {
-        console.log(error);
+        console.log('email error:', error);
       } else {
-        console.log('eb', error, body);
+        console.log('mailgun result:', body);
       }
     });
   }

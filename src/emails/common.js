@@ -23,7 +23,6 @@ export const btMain = text =>`
     ${text}
   </mj-text>
 `
-export const btUrlRoot =`test.bouncetribe.com`
 
 export const btLogo =
   `<mj-image
@@ -35,15 +34,16 @@ export const btLogo =
 export const btMainButton = (imgMainHref, imgMainSrc) =>`
   <mj-image width="168" href="${imgMainHref}" src="${imgMainSrc}" />
 `
-export const dividerUnSubscribe =`
+export const dividerUnSubscribe = `
   <mj-divider border-width="1px" border-style="dashed" border-color="lightgrey"/>
-  <mj-text
-    font-size="13px"
-    color="#999999"
-    font-family="helvetica"
-    align="center"
-    padding-bottom="20px"
-  >
-    I don't want to receive these emails
-  </mj-text>
+    <mj-inline-links base-url="https://test.bouncetribe.com">
+      <mj-link font-size="9px"
+        color="#999999"
+        font-family="helvetica"
+        align="center"
+        padding-bottom="20px"
+        href="/unsubscribe">
+          I don't want to receive these emails
+      </mj-link>
+    </mj-inline-links>
   `

@@ -2,7 +2,7 @@
 import { mjml2html } from 'mjml'
 import { btLogo, dividerUnSubscribe, btUrlRoot, btHeadline, btMain, btMainButton } from './common'
 
-export const createHtml = ({headline, mainText, imgMainHref, imgMainSrc}) =>
+export const createHtml = ({headline, mainText, imgMainHref, imgMainSrc, toHandle}) =>
   mjml2html(`
     <mjml>
       <mj-body>
@@ -15,7 +15,7 @@ export const createHtml = ({headline, mainText, imgMainHref, imgMainSrc}) =>
               ${btMain(mainText)}
               ${btMainButton(imgMainHref, imgMainSrc)}
 
-              ${dividerUnSubscribe}
+              ${dividerUnSubscribe},
 
             </mj-column>
           </mj-section>

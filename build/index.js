@@ -157,7 +157,7 @@ app.use('/notifications/:type', function (req, res, next) {
         var existingComment = _node.project.comments.filter(function (comment) {
           return comment.author.id === byId;
         });
-        if (!_node.project.creator.doNotEmail && existingComment.length > 1) emailNotification = true;
+        if (!_node.project.creator.doNotEmailPR && existingComment.length > 1) emailNotification = true;
         break;
       }
     case 'BOUNCED':
@@ -165,7 +165,6 @@ app.use('/notifications/:type', function (req, res, next) {
         var _node2 = data.Bounce.node;
         var creator = _node2.project.creator;
 
-        console.log('BOUNCED!', _node2, creator);
         byId = _node2.bouncer.id;
         forId = creator.id;
         toEmail = creator.email;
@@ -173,9 +172,8 @@ app.use('/notifications/:type', function (req, res, next) {
         byHandle = _node2.bouncer.handle;
         extra = 'projectId: "' + _node2.project.id + '"';
         type = 'BOUNCED';
-        if (!creator.doNotEmailPB) {
-          emailNotification = true;
-        }
+        if (!creator.doNotEmailPB) emailNotification = true;
+
         // if bounce deleted?
         // if (existingComment.length > 1) {
         //   emailNotification = false
@@ -210,12 +208,11 @@ app.use('/notifications/:type', function (req, res, next) {
 
   next();
 });
-// console.log('etbwerqvqewrwgefwrtegwertsd');
-(0, _emails2.default)({ type: "BOUNCED",
-  forHandle: 'subliminal_lime',
-  toEmail: "holesinabarrel@gmail.com",
-  byHandle: "someoneelse",
-  projectTitle: "Tree Heart" });
+// sendEmail({type: "BOUNCED",
+//   forHandle: 'subliminal_lime',
+//   toEmail: "holesinabarrel@gmail.com",
+//   byHandle: "someoneelse",
+//   projectTitle: "tree heart"})
 var server = app.listen(app.get('port'), function () {
   console.log('Server is running at port ' + app.get('port'));
 });
