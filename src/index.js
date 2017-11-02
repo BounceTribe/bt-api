@@ -111,7 +111,8 @@ app.use('/notifications/:type', (req, res, next) => {
       if (node.accepted) {
         type = "TRIBE_REQUEST_ACCEPTED"
         byId = node.recipient.id
-        byHandle = node.actor.handle
+        byHandle = node.recipient.handle
+        forHandle = node.actor.handle
         forId = node.actor.id
         toEmail = node.actor.email
         if (!node.actor.doNotEmailTA) emailNotification = true
@@ -119,8 +120,9 @@ app.use('/notifications/:type', (req, res, next) => {
       } else {
         type = "TRIBE_REQUEST"
         byId = node.actor.id
+        byHandle = node.actor.handle
         forId = node.recipient.id
-        byHandle = node.recipient.handle
+        forHandle = node.recipient.handle
         toEmail = node.recipient.email
         if (!node.recipient.doNotEmailTR) emailNotification = true
       }

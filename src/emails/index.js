@@ -62,7 +62,7 @@ export default function sendEmail({toEmail, byHandle, type, projectTitle, sessio
     }
   }
 
-  let generatedHtml = createHtml({headline, mainText, imgMainHref, imgMainSrc})
+  let generatedHtml = createHtml({headline, mainText, imgMainHref, imgMainSrc, forHandle})
 
   html = generatedHtml.html
 

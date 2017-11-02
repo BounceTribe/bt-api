@@ -95,7 +95,7 @@ function sendEmail(_ref) {
       }
   }
 
-  var generatedHtml = (0, _createHtml.createHtml)({ headline: headline, mainText: mainText, imgMainHref: imgMainHref, imgMainSrc: imgMainSrc });
+  var generatedHtml = (0, _createHtml.createHtml)({ headline: headline, mainText: mainText, imgMainHref: imgMainHref, imgMainSrc: imgMainSrc, forHandle: forHandle });
 
   html = generatedHtml.html;
 
