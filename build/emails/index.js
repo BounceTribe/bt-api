@@ -27,90 +27,110 @@ var _projectBounced2 = _interopRequireDefault(_projectBounced);
 
 require('dotenv/config');
 
+var _createHtml = require('./createHtml');
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-//
-//
-// console.log(projectBounced('USER 1111111111jake', 'USER EROGNUSEIURGHWIUERGchris', 'PROJECT LIIIINKS'));
-var domain = 'mail.bouncetribe.com';
+var mailDomain = 'mail.bouncetribe.com';
+var siteDomain = 'test.bouncetribe.com';
 var apiKey = process.env.mailgunKey;
 
-var mailgun = new _mailgunJs2.default({ apiKey: apiKey, domain: domain });
+var mailgun = new _mailgunJs2.default({ apiKey: apiKey, mailDomain: mailDomain });
+
+var headline = void 0,
+    mainText = void 0,
+    imgMainHref = void 0,
+    imgMainSrc = void 0;
 
 function sendEmail(props) {
-  console.log('props', props);
+
+  console.log('sendemail props', props);
   var toEmail = props.toEmail,
       byHandle = props.byHandle,
       type = props.type,
       projectTitle = props.projectTitle,
-      sessionId = props.sessionId,
       forHandle = props.forHandle,
-      urlCode = props.urlCode;
+      urlCode = props.urlCode,
+      byId = props.byId,
+      forId = props.forId;
 
-  var html = '';
   var subject = '';
+
   switch (type) {
-    case 'FRIEND_REQUEST':
+
+    case 'TRIBE_REQUEST':
       {
-        html = (0, _friendRequestAccepted2.default)(byHandle);
-        subject = 'Friend Request Accepted';
+        subject = 'New Tribe Request';
+        headline = 'New Tribe Request!';
+        mainText = byHandle + ' has invited you to their tribe.';
+        imgMainHref = siteDomain + '/acceptInvite/tribe/' + forId + '/' + byId; //TODO
+        imgMainSrc = 'https://raw.githubusercontent.com/BounceTribe/bt-api/master/src/img/acceptRequest.png';
         break;
       }
-    case 'FRIEND_REQUEST_ACCEPTED':
+
+    case 'TRIBE_REQUEST_ACCEPTED':
       {
-        html = (0, _friendRequestAccepted2.default)(byHandle);
-        subject = 'Friend Request Accepted';
+        subject = 'Tribe Request Accepted';
+        headline = 'Tribe Request Accepted!';
+        mainText = byHandle + ' has joined your tribe.';
+        imgMainHref = siteDomain + '/tribe/' + forHandle;
+        imgMainSrc = 'https://raw.githubusercontent.com/BounceTribe/bt-api/master/src/img/viewTribe.png';
         break;
       }
+
     case 'PROJECT_FEEDBACK_RECEIVED':
       {
-        html = (0, _feedbackReceived2.default)(byHandle, projectTitle, forHandle);
+        headline = 'Feedback Received!';
+        mainText = byHandle + ' liked your ' + projectTitle + ' project and bounced it to share with their tribe.';
+        imgMainHref = siteDomain + '/' + forHandle + '/' + projectTitle;
+        imgMainSrc = 'https://raw.githubusercontent.com/BounceTribe/bt-api/master/src/img/viewProject.png';
         subject = 'Feedback Received';
         break;
       }
-    case 'SESSION_FEEDBACK_RECEIVED':
-      {
-        html = (0, _feedbackReceived2.default)(byHandle, 'session/' + sessionId + '/mine', forHandle);
-        subject = 'Feedback Received';
-        break;
-      }
-    case 'INVITATION_RECEIVED':
-      {
-        html = (0, _invitationReceived2.default)(byHandle, urlCode);
-        console.log('invitationReceived(byHandle, urlCode)', (0, _invitationReceived2.default)(byHandle, urlCode));
-        subject = 'BounceTribe Invitation Received';
-        break;
-      }
-    case 'FB_FRIEND_JOINED':
-      {
-        break;
-      }
-    case 'MESSAGE':
-      {
-        break;
-      }
+
     case 'BOUNCED':
       {
-        html = (0, _projectBounced2.default)(byHandle, forHandle, projectTitle);
-        console.log('html', html);
         subject = 'Project Bounced';
+        headline = 'Project Bounced!';
+        mainText = byHandle + ' liked your ' + projectTitle + ' project and bounced it to share with their tribe.';
+        imgMainHref = siteDomain + '/' + forHandle + '/' + projectTitle;
+        imgMainSrc = 'https://raw.githubusercontent.com/BounceTribe/bt-api/master/src/img/viewProject.png';
         break;
       }
+
+    case 'INVITATION_RECEIVED':
+      {
+        subject = 'BounceTribe Invitation Received';
+        headline = byHandle + ' has invited you to join their tribe!';
+        mainText = 'Your friend is using BounceTribe to share their music and wants to collaborate with you.';
+        imgMainHref = siteDomain + '/' + forId + '/acceptInvite/join/' + byId; //TODO
+        imgMainSrc = 'https://raw.githubusercontent.com/BounceTribe/bt-api/master/src/img/acceptInvite.png';
+        break;
+      }
+
     default:
-      {}
+      {
+        console.log('unknown email type', props);
+      }
   }
 
-  if (html) {
-    console.log('yeshtml\n', html);
+  var generatedHtml = (0, _createHtml.createHtml)({ headline: headline, mainText: mainText, imgMainHref: imgMainHref, imgMainSrc: imgMainSrc });
+  // console.log('gen', generatedHtml);
+  if (!generatedHtml.errors.length) {
+    console.log('MAILGUN', toEmail, subject);
     mailgun.messages().send({
       from: "BounceTribe <hello@bouncetribe.com>",
       to: toEmail,
-      html: html,
+      html: generatedHtml.html,
       subject: subject
     }, function (error, body) {
       if (error) {
-        console.log(error);
+        console.log('mailgun error', error);
+      } else {
+        console.log('eb', error, body);
       }
     });
+  } else {
+    console.log('email error', generatedHtml.errors);
   }
 }

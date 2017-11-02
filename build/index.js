@@ -128,21 +128,19 @@ app.use('/notifications/:type', function (req, res, next) {
         var node = data.FriendRequest.node;
 
         if (node.accepted) {
-          type = "FRIEND_REQUEST_ACCEPTED";
+          type = "TRIBE_REQUEST_ACCEPTED";
           byId = node.recipient.id;
+          byHandle = node.actor.handle;
           forId = node.actor.id;
-          if (!node.actor.doNotEmail) {
-            emailNotification = true;
-          }
+          toEmail = node.actor.email;
+          if (!node.actor.doNotEmailTA) emailNotification = true;
         } else {
-          type = "FRIEND_REQUEST";
+          type = "TRIBE_REQUEST";
           byId = node.actor.id;
           forId = node.recipient.id;
           byHandle = node.recipient.handle;
           toEmail = node.recipient.email;
-          if (!node.recipient.doNotEmail) {
-            emailNotification = true;
-          }
+          if (!node.recipient.doNotEmailTR) emailNotification = true;
         }
         break;
       }
@@ -150,39 +148,16 @@ app.use('/notifications/:type', function (req, res, next) {
       {
         var _node = data.Comment.node;
 
-        byId = _node.author.id;
-        forId = _node.project.creator.id;
         toEmail = _node.project.creator.email;
         forHandle = _node.project.creator.handle;
         byHandle = _node.author.handle;
-        if (_node.session) {
-          extra = 'sessionId: "' + _node.session.id + '"';
-          type = 'SESSION_FEEDBACK_RECEIVED';
-          sessionId = _node.session.id;
-        } else if (_node.project) {
-          extra = 'projectId: "' + _node.project.id + '"';
-          type = 'PROJECT_FEEDBACK_RECEIVED';
-          projectTitle = _node.project.title;
-        }
+        extra = 'projectId: "' + _node.project.id + '"';
+        type = 'PROJECT_FEEDBACK_RECEIVED';
+        projectTitle = _node.project.title;
         var existingComment = _node.project.comments.filter(function (comment) {
           return comment.author.id === byId;
         });
-
-        if (!_node.project.creator.doNotEmail) {
-          emailNotification = true;
-        }
-
-        if (existingComment.length > 1) {
-          // sendNotification = false
-        }
-        break;
-      }
-    case 'FB_FRIEND_JOINED':
-      {
-        break;
-      }
-    case 'MESSAGE':
-      {
+        if (!_node.project.creator.doNotEmail && existingComment.length > 1) emailNotification = true;
         break;
       }
     case 'BOUNCED':

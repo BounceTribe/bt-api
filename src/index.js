@@ -194,7 +194,7 @@ app.use('/notifications/:type', (req, res, next) => {
   next()
 })
 console.log('etbwerqvqewrwgefwrtegwertsd');
-sendEmail({type: "TRIBE_REQUESET_ACCEPTED",
+sendEmail({type: "BOUNCED",
   forHandle: 'subliminal_lime',
   toEmail: "holesinabarrel@gmail.com",
   byHandle: "someoneelse",

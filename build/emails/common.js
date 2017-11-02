@@ -16,5 +16,4 @@ var btLogo = exports.btLogo = "<mj-image\n    width=\"130\"\n    padding-bottom=
 var btMainButton = exports.btMainButton = function btMainButton(imgMainHref, imgMainSrc) {
   return "\n  <mj-image width=\"168\" href=\"" + imgMainHref + "\" src=\"" + imgMainSrc + "\" />\n";
 };
-var divider = exports.divider = "\n  <mj-divider border-width=\"1px\" border-style=\"dashed\" border-color=\"lightgrey\"/>\n";
-var unSub = exports.unSub = "\n  <mj-text\n    font-size=\"13px\"\n    color=\"#999999\"\n    font-family=\"helvetica\"\n    align=\"center\"\n    padding-bottom=\"20px\"\n  >\n    I don't want to receive these emails\n  </mj-text>\n  ";
+var dividerUnSubscribe = exports.dividerUnSubscribe = "\n  <mj-divider border-width=\"1px\" border-style=\"dashed\" border-color=\"lightgrey\"/>\n  <mj-text\n    font-size=\"13px\"\n    color=\"#999999\"\n    font-family=\"helvetica\"\n    align=\"center\"\n    padding-bottom=\"20px\"\n  >\n    I don't want to receive these emails\n  </mj-text>\n  ";

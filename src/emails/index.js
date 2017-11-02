@@ -4,7 +4,7 @@ import invitationReceived from './invitationReceived'
 import friendRequestAccepted from './friendRequestAccepted'
 import projectBounced from './projectBounced'
 import {} from 'dotenv/config'
-import createHtml from './createHtml'
+import {createHtml} from './createHtml'
 
 const mailDomain = 'mail.bouncetribe.com'
 const siteDomain = `test.bouncetribe.com`
@@ -72,8 +72,9 @@ export default function sendEmail(props) {
   }
 
   let generatedHtml = createHtml({headline, mainText, imgMainHref, imgMainSrc})
-
+  // console.log('gen', generatedHtml);
   if (!generatedHtml.errors.length) {
+    console.log('MAILGUN',toEmail, subject);
     mailgun.messages().send({
        from: "BounceTribe <hello@bouncetribe.com>",
        to: toEmail,
@@ -82,6 +83,8 @@ export default function sendEmail(props) {
      }, (error, body) => {
       if (error) {
         console.log('mailgun error', error)
+      } else {
+        console.log('eb', error, body);
       }
 
     })
