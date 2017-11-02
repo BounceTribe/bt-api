@@ -148,6 +148,7 @@ app.use('/notifications/:type', function (req, res, next) {
       {
         var _node = data.Comment.node;
 
+        console.log('COMMENT NODE', _node);
         toEmail = _node.project.creator.email;
         forHandle = _node.project.creator.handle;
         byHandle = _node.author.handle;

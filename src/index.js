@@ -128,6 +128,7 @@ app.use('/notifications/:type', (req, res, next) => {
     }
     case 'COMMENT': {
       let {node} = data.Comment
+      console.log('COMMENT NODE', node);
       toEmail = node.project.creator.email
       forHandle = node.project.creator.handle
       byHandle = node.author.handle
