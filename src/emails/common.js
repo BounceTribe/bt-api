@@ -34,7 +34,7 @@ export const btLogo =
 export const btMainButton = (imgMainHref, imgMainSrc) =>`
   <mj-image width="168" href="${imgMainHref}" src="${imgMainSrc}" />
 `
-export const dividerUnSubscribe = `
+export const dividerUnSubscribe = (handle) =>`
   <mj-divider border-width="1px" border-style="dashed" border-color="lightgrey"/>
     <mj-inline-links base-url="https://test.bouncetribe.com">
       <mj-link font-size="9px"
@@ -42,7 +42,7 @@ export const dividerUnSubscribe = `
         font-family="helvetica"
         align="center"
         padding-bottom="20px"
-        href="/unsubscribe">
+        href="/${handle}/unsubscribe">
           I don't want to receive these emails
       </mj-link>
     </mj-inline-links>
