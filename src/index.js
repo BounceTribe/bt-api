@@ -194,11 +194,11 @@ app.use('/notifications/:type', (req, res, next) => {
   next()
 })
 // console.log('etbwerqvqewrwgefwrtegwertsd');
-// sendEmail({type: "BOUNCED",
-//   forHandle: 'subliminal_lime',
-//   toEmail: "holesinabarrel@gmail.com",
-//   byHandle: "someoneelse",
-//   projectTitle: "Tree Heart"})
+sendEmail({type: "BOUNCED",
+  forHandle: 'subliminal_lime',
+  toEmail: "holesinabarrel@gmail.com",
+  byHandle: "someoneelse",
+  projectTitle: "Tree Heart"})
 const server = app.listen(app.get('port'), ()=>{
   console.log(`Server is running at port ${app.get('port')}`)
 })

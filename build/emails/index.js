@@ -29,33 +29,32 @@ var _createHtml = require('./createHtml');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var mailDomain = 'mail.bouncetribe.com';
+//
+//
+// console.log(projectBounced('USER 1111111111jake', 'USER EROGNUSEIURGHWIUERGchris', 'PROJECT LIIIINKS'));
+var siteDomain = 'test.bouncetribe.com';
 // import {} from 'dotenv/config'
 
-var siteDomain = 'test.bouncetribe.com';
+var domain = 'mail.bouncetribe.com';
 var apiKey = process.env.mailgunKey;
 
-var mailgun = new _mailgunJs2.default({ apiKey: apiKey, mailDomain: mailDomain });
+var mailgun = new _mailgunJs2.default({ apiKey: apiKey, domain: domain });
 
-var headline = void 0,
-    mainText = void 0,
-    imgMainHref = void 0,
-    imgMainSrc = void 0;
+function sendEmail(_ref) {
+  var toEmail = _ref.toEmail,
+      byHandle = _ref.byHandle,
+      type = _ref.type,
+      projectTitle = _ref.projectTitle,
+      sessionId = _ref.sessionId,
+      forHandle = _ref.forHandle,
+      urlCode = _ref.urlCode;
 
-function sendEmail(props) {
-
-  console.log('sendemail props', props);
-  var toEmail = props.toEmail,
-      byHandle = props.byHandle,
-      type = props.type,
-      projectTitle = props.projectTitle,
-      forHandle = props.forHandle,
-      urlCode = props.urlCode,
-      byId = props.byId,
-      forId = props.forId;
-
+  var headline = void 0;
+  var mainText = void 0;
+  var imgMainHref = void 0;
+  var imgMainSrc = void 0;
+  var html = '';
   var subject = '';
-
   switch (type) {
 
     case 'TRIBE_REQUEST':
@@ -115,22 +114,20 @@ function sendEmail(props) {
   }
 
   var generatedHtml = (0, _createHtml.createHtml)({ headline: headline, mainText: mainText, imgMainHref: imgMainHref, imgMainSrc: imgMainSrc });
-  // console.log('gen', generatedHtml);
-  if (!generatedHtml.errors.length) {
-    console.log('MAILGUN', toEmail, subject);
+  html = generatedHtml.html;
+  if (html) {
+    console.log('yeshtml\n', html);
     mailgun.messages().send({
       from: "BounceTribe <hello@bouncetribe.com>",
       to: toEmail,
-      html: generatedHtml.html,
+      html: html,
       subject: subject
     }, function (error, body) {
       if (error) {
-        console.log('mailgun error', error);
+        console.log(error);
       } else {
         console.log('eb', error, body);
       }
     });
-  } else {
-    console.log('email error', generatedHtml.errors);
   }
 }
