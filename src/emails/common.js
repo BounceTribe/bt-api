@@ -42,7 +42,7 @@ export const dividerUnSubscribe = (handle) =>`
         font-family="helvetica"
         align="center"
         padding-bottom="20px"
-        href="/${handle}/unsubscribe">
+        href="/${handle}/projects/unsubscribe">
           I don't want to receive these emails
       </mj-link>
     </mj-inline-links>

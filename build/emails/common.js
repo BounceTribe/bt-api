@@ -16,5 +16,5 @@ var btMainButton = exports.btMainButton = function btMainButton(imgMainHref, img
   return "\n  <mj-image width=\"168\" href=\"" + imgMainHref + "\" src=\"" + imgMainSrc + "\" />\n";
 };
 var dividerUnSubscribe = exports.dividerUnSubscribe = function dividerUnSubscribe(handle) {
-  return "\n  <mj-divider border-width=\"1px\" border-style=\"dashed\" border-color=\"lightgrey\"/>\n    <mj-inline-links base-url=\"https://test.bouncetribe.com\">\n      <mj-link font-size=\"9px\"\n        color=\"#999999\"\n        font-family=\"helvetica\"\n        align=\"center\"\n        padding-bottom=\"20px\"\n        href=\"/" + handle + "/unsubscribe\">\n          I don't want to receive these emails\n      </mj-link>\n    </mj-inline-links>\n  ";
+  return "\n  <mj-divider border-width=\"1px\" border-style=\"dashed\" border-color=\"lightgrey\"/>\n    <mj-inline-links base-url=\"https://test.bouncetribe.com\">\n      <mj-link font-size=\"9px\"\n        color=\"#999999\"\n        font-family=\"helvetica\"\n        align=\"center\"\n        padding-bottom=\"20px\"\n        href=\"/" + handle + "/projects/unsubscribe\">\n          I don't want to receive these emails\n      </mj-link>\n    </mj-inline-links>\n  ";
 };
