@@ -8,6 +8,7 @@ const {mailgunKey: apiKey} = process.env
 const mailgun = new Mailgun({apiKey, domain})
 
 export default function sendEmail({toEmail, byHandle, type, projectTitle, sessionId, forHandle, urlCode}) {
+  console.log('emailSend', {toEmail, byHandle, type, projectTitle, sessionId, forHandle, urlCode});
   let headline, mainText, imgMainHref, imgMainSrc, html, subject
   switch (type) {
 

@@ -146,20 +146,22 @@ app.use('/notifications/:type', function (req, res, next) {
       }
     case 'COMMENT':
       {
+        type = 'PROJECT_FEEDBACK_RECEIVED';
         var _node = data.Comment.node;
 
         console.log('COMMENT NODE', _node);
         toEmail = _node.project.creator.email;
         forHandle = _node.project.creator.handle;
+        forId = _node.project.creator.id;
         byHandle = _node.author.handle;
+        byId = _node.author.id;
         extra = 'projectId: "' + _node.project.id + '"';
-        type = 'PROJECT_FEEDBACK_RECEIVED';
         projectTitle = _node.project.title;
         var existingComment = _node.project.comments.filter(function (comment) {
           return comment.author.id === byId;
         });
-        console.log('existingComment', existingComment);
-        if (!_node.project.creator.doNotEmailPR && existingComment.length > 1) emailNotification = true;
+        console.log('existingComment', existingComment[0]);
+        if (!_node.project.creator.doNotEmailPR /*&& existingComment.length > 1*/) emailNotification = true;
         break;
       }
     case 'BOUNCED':

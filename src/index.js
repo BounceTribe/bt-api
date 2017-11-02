@@ -127,19 +127,21 @@ app.use('/notifications/:type', (req, res, next) => {
       break
     }
     case 'COMMENT': {
+      type = 'PROJECT_FEEDBACK_RECEIVED'
       let {node} = data.Comment
       console.log('COMMENT NODE', node);
       toEmail = node.project.creator.email
       forHandle = node.project.creator.handle
+      forId = node.project.creator.id
       byHandle = node.author.handle
+      byId = node.author.id
       extra = `projectId: "${node.project.id}"`
-      type = 'PROJECT_FEEDBACK_RECEIVED'
       projectTitle = node.project.title
       let existingComment = node.project.comments.filter( (comment) =>
         comment.author.id === byId
       )
-      console.log('existingComment', existingComment);
-      if (!node.project.creator.doNotEmailPR && existingComment.length > 1)
+      console.log('existingComment', existingComment[0]);
+      if (!node.project.creator.doNotEmailPR /*&& existingComment.length > 1*/)
         emailNotification = true
       break
 

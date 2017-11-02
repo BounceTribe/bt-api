@@ -30,6 +30,7 @@ function sendEmail(_ref) {
       forHandle = _ref.forHandle,
       urlCode = _ref.urlCode;
 
+  console.log('emailSend', { toEmail: toEmail, byHandle: byHandle, type: type, projectTitle: projectTitle, sessionId: sessionId, forHandle: forHandle, urlCode: urlCode });
   var headline = void 0,
       mainText = void 0,
       imgMainHref = void 0,
