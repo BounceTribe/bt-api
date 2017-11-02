@@ -138,6 +138,7 @@ app.use('/notifications/:type', (req, res, next) => {
       let existingComment = node.project.comments.filter( (comment) =>
         comment.author.id === byId
       )
+      console.log('existingComment', existingComment);
       if (!node.project.creator.doNotEmailPR && existingComment.length > 1)
         emailNotification = true
       break

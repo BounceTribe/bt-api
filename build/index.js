@@ -158,6 +158,7 @@ app.use('/notifications/:type', function (req, res, next) {
         var existingComment = _node.project.comments.filter(function (comment) {
           return comment.author.id === byId;
         });
+        console.log('existingComment', existingComment);
         if (!_node.project.creator.doNotEmailPR && existingComment.length > 1) emailNotification = true;
         break;
       }
