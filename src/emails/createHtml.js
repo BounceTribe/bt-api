@@ -2,7 +2,7 @@
 import { mjml2html } from 'mjml'
 import { btLogo, dividerUnSubscribe, btUrlRoot, btHeadline, btMain, btMainButton } from './common'
 
-export const createHtml = ({headline, mainText, imgMainHref, imgMainSrc, forHandle}) =>
+export const createHtml = ({ headline, mainText, imgMainHref, imgMainSrc, forHandle }) =>
   mjml2html(`
     <mjml>
       <mj-body>
