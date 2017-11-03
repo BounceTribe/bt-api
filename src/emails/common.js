@@ -34,7 +34,7 @@ export const btLogo =
 export const btMainButton = (imgMainHref, imgMainSrc) =>`
   <mj-image width="168" href="${imgMainHref}" src="${imgMainSrc}" />
 `
-export const dividerUnSubscribe = (handle) =>`
+export const dividerUnSubscribe = `
   <mj-divider border-width="1px" border-style="dashed" border-color="lightgrey"/>
     <mj-inline-links base-url="https://test.bouncetribe.com">
       <mj-link font-size="9px"

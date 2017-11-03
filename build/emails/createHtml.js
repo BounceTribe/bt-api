@@ -15,5 +15,5 @@ var createHtml = exports.createHtml = function createHtml(_ref) {
       imgMainHref = _ref.imgMainHref,
       imgMainSrc = _ref.imgMainSrc,
       forHandle = _ref.forHandle;
-  return (0, _mjml.mjml2html)('\n    <mjml>\n      <mj-body>\n        <mj-container>\n          <mj-section>\n            <mj-column>\n\n              ' + _common.btLogo + '\n              ' + (0, _common.btHeadline)(headline) + '\n              ' + (0, _common.btMain)(mainText) + '\n              ' + (0, _common.btMainButton)(imgMainHref, imgMainSrc) + '\n\n              ' + (forHandle && (0, _common.dividerUnSubscribe)(forHandle)) + ',\n\n            </mj-column>\n          </mj-section>\n        </mj-container>\n      </mj-body>\n    </mjml>\n  ');
+  return (0, _mjml.mjml2html)('\n    <mjml>\n      <mj-body>\n        <mj-container>\n          <mj-section>\n            <mj-column>\n\n              ' + _common.btLogo + '\n              ' + (0, _common.btHeadline)(headline) + '\n              ' + (0, _common.btMain)(mainText) + '\n              ' + (0, _common.btMainButton)(imgMainHref, imgMainSrc) + '\n\n              ' + (forHandle && _common.dividerUnSubscribe) + ',\n\n            </mj-column>\n          </mj-section>\n        </mj-container>\n      </mj-body>\n    </mjml>\n  ');
 };

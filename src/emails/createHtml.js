@@ -15,7 +15,7 @@ export const createHtml = ({headline, mainText, imgMainHref, imgMainSrc, forHand
               ${btMain(mainText)}
               ${btMainButton(imgMainHref, imgMainSrc)}
 
-              ${forHandle && dividerUnSubscribe(forHandle)},
+              ${forHandle && dividerUnSubscribe},
 
             </mj-column>
           </mj-section>
