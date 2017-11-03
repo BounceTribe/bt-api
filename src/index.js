@@ -82,11 +82,11 @@ app.use('/artists', (req, res, next) => {
 })
 
 app.use('/email', (req, res, next) => {
-  let {toEmail, byHandle} = req.body.query
+  let {toEmail, byHandle, byId} = req.body.query
   let type = 'INVITATION_RECEIVED'
   let urlCode = ''
   console.log('email Invitiation to:', toEmail)
-  sendEmail({toEmail, byHandle, type, urlCode})
+  sendEmail({toEmail, byHandle, type, byId, urlCode})
   res.send()
 })
 
@@ -190,6 +190,7 @@ app.use('/notifications/:type', (req, res, next) => {
       projectTitle,
       sessionId,
       forHandle,
+      byId,
       urlCode
     })
   }

@@ -1,5 +1,5 @@
 import Mailgun from 'mailgun-js'
-// import {} from 'dotenv/config'
+import {} from 'dotenv/config'
 import {createHtml} from './createHtml'
 
 const siteDomain = 'https://test.bouncetribe.com'
@@ -7,8 +7,8 @@ const domain = 'mail.bouncetribe.com'
 const {mailgunKey: apiKey} = process.env
 const mailgun = new Mailgun({apiKey, domain})
 
-export default function sendEmail({toEmail, byHandle, type, projectTitle, sessionId, forHandle, urlCode}) {
-  console.log('emailSend', {toEmail, byHandle, type, projectTitle, sessionId, forHandle, urlCode});
+export default function sendEmail({toEmail, byHandle, byId, type, projectTitle, sessionId, forHandle, urlCode}) {
+  console.log('emailSend', {toEmail, byHandle, type, projectTitle, sessionId, forHandle, urlCode, byId});
   let headline, mainText, imgMainHref, imgMainSrc, html, subject
   switch (type) {
 
@@ -52,7 +52,7 @@ export default function sendEmail({toEmail, byHandle, type, projectTitle, sessio
       subject = 'BounceTribe Invitation Received'
       headline = `${byHandle} has invited you to join their tribe!`
       mainText = `Your friend is using BounceTribe to share their music and wants to collaborate with you.`
-      imgMainHref = `${siteDomain}/acceptinvite/${forId}/${byId}` //TODO
+      imgMainHref = `${siteDomain}/acceptinvite/${byId}` //TODO
       imgMainSrc =   `http://bouncetribe.com/wp-content/uploads/2017/11/Accept-Request-btn.png`
       break
     }

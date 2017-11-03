@@ -9,13 +9,13 @@ var _mailgunJs = require('mailgun-js');
 
 var _mailgunJs2 = _interopRequireDefault(_mailgunJs);
 
+require('dotenv/config');
+
 var _createHtml = require('./createHtml');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var siteDomain = 'https://test.bouncetribe.com';
-// import {} from 'dotenv/config'
-
 var domain = 'mail.bouncetribe.com';
 var apiKey = process.env.mailgunKey;
 
@@ -24,13 +24,14 @@ var mailgun = new _mailgunJs2.default({ apiKey: apiKey, domain: domain });
 function sendEmail(_ref) {
   var toEmail = _ref.toEmail,
       byHandle = _ref.byHandle,
+      byId = _ref.byId,
       type = _ref.type,
       projectTitle = _ref.projectTitle,
       sessionId = _ref.sessionId,
       forHandle = _ref.forHandle,
       urlCode = _ref.urlCode;
 
-  console.log('emailSend', { toEmail: toEmail, byHandle: byHandle, type: type, projectTitle: projectTitle, sessionId: sessionId, forHandle: forHandle, urlCode: urlCode });
+  console.log('emailSend', { toEmail: toEmail, byHandle: byHandle, type: type, projectTitle: projectTitle, sessionId: sessionId, forHandle: forHandle, urlCode: urlCode, byId: byId });
   var headline = void 0,
       mainText = void 0,
       imgMainHref = void 0,
@@ -84,7 +85,7 @@ function sendEmail(_ref) {
         subject = 'BounceTribe Invitation Received';
         headline = byHandle + ' has invited you to join their tribe!';
         mainText = 'Your friend is using BounceTribe to share their music and wants to collaborate with you.';
-        imgMainHref = siteDomain + '/acceptinvite/' + forId + '/' + byId; //TODO
+        imgMainHref = siteDomain + '/acceptinvite/' + byId; //TODO
         imgMainSrc = 'http://bouncetribe.com/wp-content/uploads/2017/11/Accept-Request-btn.png';
         break;
       }

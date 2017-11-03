@@ -97,12 +97,13 @@ app.use('/artists', function (req, res, next) {
 app.use('/email', function (req, res, next) {
   var _req$body$query = req.body.query,
       toEmail = _req$body$query.toEmail,
-      byHandle = _req$body$query.byHandle;
+      byHandle = _req$body$query.byHandle,
+      byId = _req$body$query.byId;
 
   var type = 'INVITATION_RECEIVED';
   var urlCode = '';
   console.log('email Invitiation to:', toEmail);
-  (0, _emails2.default)({ toEmail: toEmail, byHandle: byHandle, type: type, urlCode: urlCode });
+  (0, _emails2.default)({ toEmail: toEmail, byHandle: byHandle, type: type, byId: byId, urlCode: urlCode });
   res.send();
 });
 
@@ -208,6 +209,7 @@ app.use('/notifications/:type', function (req, res, next) {
       projectTitle: projectTitle,
       sessionId: sessionId,
       forHandle: forHandle,
+      byId: byId,
       urlCode: urlCode
     });
   }
