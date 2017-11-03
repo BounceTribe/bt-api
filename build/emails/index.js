@@ -85,7 +85,7 @@ function sendEmail(_ref) {
         subject = 'BounceTribe Invitation Received';
         headline = byHandle + ' has invited you to join their tribe!';
         mainText = 'Your friend is using BounceTribe to share their music and wants to collaborate with you.';
-        imgMainHref = siteDomain + '/acceptinvite/nofriendrequest/' + byId; //TODO
+        imgMainHref = siteDomain + '/acceptinvite/' + byId; //TODO
         imgMainSrc = 'http://bouncetribe.com/wp-content/uploads/2017/11/Accept-Request-btn.png';
         break;
       }
