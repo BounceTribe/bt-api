@@ -129,7 +129,7 @@ app.use('/notifications/:type', function (req, res, next) {
         var node = data.FriendRequest.node;
 
         if (node.accepted) {
-          type = "TRIBE_REQUEST_ACCEPTED";
+          type = "FRIEND_REQUEST_ACCEPTED";
           byId = node.recipient.id;
           byHandle = node.recipient.handle;
           forHandle = node.actor.handle;
@@ -137,7 +137,7 @@ app.use('/notifications/:type', function (req, res, next) {
           toEmail = node.actor.email;
           if (!node.actor.doNotEmailTA) emailNotification = true;
         } else {
-          type = "TRIBE_REQUEST";
+          type = "FRIEND_REQUEST";
           byId = node.actor.id;
           byHandle = node.actor.handle;
           forId = node.recipient.id;

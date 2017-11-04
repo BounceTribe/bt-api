@@ -1,5 +1,5 @@
 import Mailgun from 'mailgun-js'
-// import {} from 'dotenv/config'
+import {} from 'dotenv/config'
 import {createHtml} from './createHtml'
 
 const siteDomain = 'https://test.bouncetribe.com'
@@ -12,7 +12,7 @@ export default function sendEmail({toEmail, byHandle, byId, type, projectTitle, 
   let headline, mainText, imgMainHref, imgMainSrc, html, subject
   switch (type) {
 
-    case 'TRIBE_REQUEST': {
+    case 'FRIEND_REQUEST': {
       subject= 'New Tribe Request'
       headline = 'New Tribe Request!'
       mainText = `${byHandle} has invited you to their tribe.`
@@ -21,7 +21,7 @@ export default function sendEmail({toEmail, byHandle, byId, type, projectTitle, 
       break
     }
 
-    case 'TRIBE_REQUEST_ACCEPTED': {
+    case 'FRIEND_REQUEST_ACCEPTED': {
       subject = 'Tribe Request Accepted'
       headline = 'Tribe Request Accepted!'
       mainText = `${byHandle} has joined your tribe.`

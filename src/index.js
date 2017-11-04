@@ -109,7 +109,7 @@ app.use('/notifications/:type', (req, res, next) => {
     case 'FRIENDS': {
       let {node} = data.FriendRequest
       if (node.accepted) {
-        type = "TRIBE_REQUEST_ACCEPTED"
+        type = "FRIEND_REQUEST_ACCEPTED"
         byId = node.recipient.id
         byHandle = node.recipient.handle
         forHandle = node.actor.handle
@@ -118,7 +118,7 @@ app.use('/notifications/:type', (req, res, next) => {
         if (!node.actor.doNotEmailTA) emailNotification = true
 
       } else {
-        type = "TRIBE_REQUEST"
+        type = "FRIEND_REQUEST"
         byId = node.actor.id
         byHandle = node.actor.handle
         forId = node.recipient.id
