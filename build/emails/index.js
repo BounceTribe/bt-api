@@ -9,13 +9,13 @@ var _mailgunJs = require('mailgun-js');
 
 var _mailgunJs2 = _interopRequireDefault(_mailgunJs);
 
+require('dotenv/config');
+
 var _createHtml = require('./createHtml');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var siteDomain = 'https://test.bouncetribe.com';
-// import {} from 'dotenv/config'
-
 var domain = 'mail.bouncetribe.com';
 var apiKey = process.env.mailgunKey;
 
@@ -40,7 +40,7 @@ function sendEmail(_ref) {
       subject = void 0;
   switch (type) {
 
-    case 'TRIBE_REQUEST':
+    case 'FRIEND_REQUEST':
       {
         subject = 'New Tribe Request';
         headline = 'New Tribe Request!';
@@ -50,7 +50,7 @@ function sendEmail(_ref) {
         break;
       }
 
-    case 'TRIBE_REQUEST_ACCEPTED':
+    case 'FRIEND_REQUEST_ACCEPTED':
       {
         subject = 'Tribe Request Accepted';
         headline = 'Tribe Request Accepted!';
