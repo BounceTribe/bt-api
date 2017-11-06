@@ -128,6 +128,7 @@ app.use('/notifications/:type', function (req, res, next) {
       {
         var node = data.FriendRequest.node;
 
+        console.log('friend request node', node);
         if (node.accepted) {
           type = "FRIEND_REQUEST_ACCEPTED";
           byId = node.recipient.id;

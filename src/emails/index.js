@@ -16,7 +16,7 @@ export default function sendEmail({toEmail, byHandle, byId, type, projectTitle, 
       subject= 'New Tribe Request'
       headline = 'New Tribe Request!'
       mainText = `${byHandle} has invited you to their tribe.`
-      imgMainHref =`${siteDomain}/acceptinvite/${byId}` //TODO
+      imgMainHref =`${siteDomain}/acceptrequest/${byId}` //TODO
       imgMainSrc  = `http://bouncetribe.com/wp-content/uploads/2017/11/Accept-Request-btn.png`
       break
     }
@@ -52,7 +52,7 @@ export default function sendEmail({toEmail, byHandle, byId, type, projectTitle, 
       subject = 'BounceTribe Invitation Received'
       headline = `${byHandle} has invited you to join their tribe!`
       mainText = `Your friend is using BounceTribe to share their music and wants to collaborate with you.`
-      imgMainHref = `${siteDomain}/acceptinvite/${byId}` //TODO
+      imgMainHref = `${siteDomain}/acceptinvite/${byId}` //TODO - add secret code
       imgMainSrc =   `http://bouncetribe.com/wp-content/uploads/2017/11/Accept-Request-btn.png`
       break
     }

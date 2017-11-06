@@ -108,6 +108,7 @@ app.use('/notifications/:type', (req, res, next) => {
   switch (type) {
     case 'FRIENDS': {
       let {node} = data.FriendRequest
+      console.log('friend request node', node);
       if (node.accepted) {
         type = "FRIEND_REQUEST_ACCEPTED"
         byId = node.recipient.id
