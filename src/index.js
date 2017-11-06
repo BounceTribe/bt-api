@@ -66,18 +66,10 @@ app.use('/artists', (req, res, next) => {
   let {query} = req.body
   if (expiration <= Date.now()) {
     refreshCredentials().then(() => {
-      searchArtists(query).then(
-        (options) => {
-          res.send(options)
-        }
-      )
+      searchArtists(query).then( options => res.send(options) )
     })
   } else {
-    searchArtists(query).then(
-      (options) => {
-        res.send(options)
-      }
-    )
+    searchArtists(query).then( options => res.send(options) )
   }
 })
 
@@ -98,6 +90,7 @@ app.use('/notifications/:type', (req, res, next) => {
       toEmail,
       byHandle,
       sessionId,
+      inviteId,
       projectTitle,
       forHandle
   let emailNotification = false
@@ -120,6 +113,7 @@ app.use('/notifications/:type', (req, res, next) => {
 
       } else {
         type = "FRIEND_REQUEST"
+        inviteId = node.id
         byId = node.actor.id
         byHandle = node.actor.handle
         forId = node.recipient.id
@@ -178,6 +172,7 @@ app.use('/notifications/:type', (req, res, next) => {
       byId,
       forId,
       type,
+      inviteId,
       extra
     })
   }
@@ -192,6 +187,7 @@ app.use('/notifications/:type', (req, res, next) => {
       sessionId,
       forHandle,
       byId,
+      inviteId,
       urlCode
     })
   }

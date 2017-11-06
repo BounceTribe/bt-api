@@ -17,6 +17,7 @@ var siteDomain = 'https://test.bouncetribe.com';
 // import {} from 'dotenv/config'
 
 var domain = 'mail.bouncetribe.com';
+var wordpressUploads = 'http://bouncetribe.com/wp-content/uploads';
 var apiKey = process.env.mailgunKey;
 
 var mailgun = new _mailgunJs2.default({ apiKey: apiKey, domain: domain });
@@ -25,13 +26,14 @@ function sendEmail(_ref) {
   var toEmail = _ref.toEmail,
       byHandle = _ref.byHandle,
       byId = _ref.byId,
+      inviteId = _ref.inviteId,
       type = _ref.type,
       projectTitle = _ref.projectTitle,
       sessionId = _ref.sessionId,
       forHandle = _ref.forHandle,
       urlCode = _ref.urlCode;
 
-  console.log('emailSend', { toEmail: toEmail, byHandle: byHandle, type: type, projectTitle: projectTitle, sessionId: sessionId, forHandle: forHandle, urlCode: urlCode, byId: byId });
+  console.log('emailSend', { toEmail: toEmail, byHandle: byHandle, type: type, inviteId: inviteId, projectTitle: projectTitle, sessionId: sessionId, forHandle: forHandle, urlCode: urlCode, byId: byId });
   var headline = void 0,
       mainText = void 0,
       imgMainHref = void 0,
@@ -45,8 +47,8 @@ function sendEmail(_ref) {
         subject = 'New Tribe Request';
         headline = 'New Tribe Request!';
         mainText = byHandle + ' has invited you to their tribe.';
-        imgMainHref = siteDomain + '/acceptrequest/' + byId; //TODO
-        imgMainSrc = 'http://bouncetribe.com/wp-content/uploads/2017/11/Accept-Request-btn.png';
+        imgMainHref = siteDomain + '/acceptrequest/' + inviteId; //TODO
+        imgMainSrc = wordpressUploads + '/2017/11/Accept-Request-btn.png';
         break;
       }
 
@@ -56,7 +58,7 @@ function sendEmail(_ref) {
         headline = 'Tribe Request Accepted!';
         mainText = byHandle + ' has joined your tribe.';
         imgMainHref = siteDomain + '/tribe/' + forHandle;
-        imgMainSrc = 'http://bouncetribe.com/wp-content/uploads/2017/11/View-My-Tribe-btn.png';
+        imgMainSrc = wordpressUploads + '/2017/11/View-My-Tribe-btn.png';
         break;
       }
 
@@ -65,7 +67,7 @@ function sendEmail(_ref) {
         headline = 'Feedback Received!';
         mainText = byHandle + ' liked your ' + projectTitle + ' project and bounced it to share with their tribe.';
         imgMainHref = siteDomain + '/' + forHandle + '/' + projectTitle;
-        imgMainSrc = 'http://bouncetribe.com/wp-content/uploads/2017/11/View-Feedback-btn.png';
+        imgMainSrc = wordpressUploads + '/2017/11/View-Feedback-btn.png';
         subject = 'Feedback Received';
         break;
       }
@@ -76,7 +78,7 @@ function sendEmail(_ref) {
         headline = 'Project Bounced!';
         mainText = byHandle + ' liked your ' + projectTitle + ' project and bounced it to share with their tribe.';
         imgMainHref = siteDomain + '/' + forHandle + '/' + projectTitle;
-        imgMainSrc = 'http://bouncetribe.com/wp-content/uploads/2017/11/View-Project-btn.png';
+        imgMainSrc = wordpressUploads + '/2017/11/View-Project-btn.png';
         break;
       }
 
@@ -86,7 +88,7 @@ function sendEmail(_ref) {
         headline = byHandle + ' has invited you to join their tribe!';
         mainText = 'Your friend is using BounceTribe to share their music and wants to collaborate with you.';
         imgMainHref = siteDomain + '/acceptinvite/' + byId; //TODO - add secret code
-        imgMainSrc = 'http://bouncetribe.com/wp-content/uploads/2017/11/Accept-Request-btn.png';
+        imgMainSrc = wordpressUploads + '/2017/11/Accept-Request-btn.png';
         break;
       }
 

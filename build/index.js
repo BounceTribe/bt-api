@@ -84,12 +84,12 @@ app.use('/artists', function (req, res, next) {
   if (expiration <= Date.now()) {
     refreshCredentials().then(function () {
       searchArtists(query).then(function (options) {
-        res.send(options);
+        return res.send(options);
       });
     });
   } else {
     searchArtists(query).then(function (options) {
-      res.send(options);
+      return res.send(options);
     });
   }
 });
@@ -116,6 +116,7 @@ app.use('/notifications/:type', function (req, res, next) {
       toEmail = void 0,
       byHandle = void 0,
       sessionId = void 0,
+      inviteId = void 0,
       projectTitle = void 0,
       forHandle = void 0;
   var emailNotification = false;
@@ -139,6 +140,7 @@ app.use('/notifications/:type', function (req, res, next) {
           if (!node.actor.doNotEmailTA) emailNotification = true;
         } else {
           type = "FRIEND_REQUEST";
+          inviteId = node.id;
           byId = node.actor.id;
           byHandle = node.actor.handle;
           forId = node.recipient.id;
@@ -198,6 +200,7 @@ app.use('/notifications/:type', function (req, res, next) {
       byId: byId,
       forId: forId,
       type: type,
+      inviteId: inviteId,
       extra: extra
     });
   }
@@ -211,6 +214,7 @@ app.use('/notifications/:type', function (req, res, next) {
       sessionId: sessionId,
       forHandle: forHandle,
       byId: byId,
+      inviteId: inviteId,
       urlCode: urlCode
     });
   }

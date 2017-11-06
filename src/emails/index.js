@@ -4,11 +4,12 @@ import {createHtml} from './createHtml'
 
 const siteDomain = 'https://test.bouncetribe.com'
 const domain = 'mail.bouncetribe.com'
+const wordpressUploads = 'http://bouncetribe.com/wp-content/uploads'
 const {mailgunKey: apiKey} = process.env
 const mailgun = new Mailgun({apiKey, domain})
 
-export default function sendEmail({toEmail, byHandle, byId, type, projectTitle, sessionId, forHandle, urlCode}) {
-  console.log('emailSend', {toEmail, byHandle, type, projectTitle, sessionId, forHandle, urlCode, byId});
+export default function sendEmail({toEmail, byHandle, byId, inviteId, type, projectTitle, sessionId, forHandle, urlCode}) {
+  console.log('emailSend', {toEmail, byHandle, type, inviteId, projectTitle, sessionId, forHandle, urlCode, byId});
   let headline, mainText, imgMainHref, imgMainSrc, html, subject
   switch (type) {
 
@@ -16,8 +17,8 @@ export default function sendEmail({toEmail, byHandle, byId, type, projectTitle, 
       subject= 'New Tribe Request'
       headline = 'New Tribe Request!'
       mainText = `${byHandle} has invited you to their tribe.`
-      imgMainHref =`${siteDomain}/acceptrequest/${byId}` //TODO
-      imgMainSrc  = `http://bouncetribe.com/wp-content/uploads/2017/11/Accept-Request-btn.png`
+      imgMainHref =`${siteDomain}/acceptrequest/${inviteId}` //TODO
+      imgMainSrc  = `${wordpressUploads}/2017/11/Accept-Request-btn.png`
       break
     }
 
@@ -26,7 +27,7 @@ export default function sendEmail({toEmail, byHandle, byId, type, projectTitle, 
       headline = 'Tribe Request Accepted!'
       mainText = `${byHandle} has joined your tribe.`
       imgMainHref = `${siteDomain}/tribe/${forHandle}`
-      imgMainSrc = `http://bouncetribe.com/wp-content/uploads/2017/11/View-My-Tribe-btn.png`
+      imgMainSrc = `${wordpressUploads}/2017/11/View-My-Tribe-btn.png`
       break
     }
 
@@ -34,7 +35,7 @@ export default function sendEmail({toEmail, byHandle, byId, type, projectTitle, 
       headline = 'Feedback Received!'
       mainText = `${byHandle} liked your ${projectTitle} project and bounced it to share with their tribe.`
       imgMainHref =`${siteDomain}/${forHandle}/${projectTitle}`
-      imgMainSrc  = `http://bouncetribe.com/wp-content/uploads/2017/11/View-Feedback-btn.png`
+      imgMainSrc  = `${wordpressUploads}/2017/11/View-Feedback-btn.png`
       subject = 'Feedback Received'
       break
     }
@@ -44,7 +45,7 @@ export default function sendEmail({toEmail, byHandle, byId, type, projectTitle, 
       headline = 'Project Bounced!'
       mainText = `${byHandle} liked your ${projectTitle} project and bounced it to share with their tribe.`
       imgMainHref =`${siteDomain}/${forHandle}/${projectTitle}`
-      imgMainSrc  = `http://bouncetribe.com/wp-content/uploads/2017/11/View-Project-btn.png`
+      imgMainSrc  = `${wordpressUploads}/2017/11/View-Project-btn.png`
       break
     }
 
@@ -53,7 +54,7 @@ export default function sendEmail({toEmail, byHandle, byId, type, projectTitle, 
       headline = `${byHandle} has invited you to join their tribe!`
       mainText = `Your friend is using BounceTribe to share their music and wants to collaborate with you.`
       imgMainHref = `${siteDomain}/acceptinvite/${byId}` //TODO - add secret code
-      imgMainSrc =   `http://bouncetribe.com/wp-content/uploads/2017/11/Accept-Request-btn.png`
+      imgMainSrc =   `${wordpressUploads}/2017/11/Accept-Request-btn.png`
       break
     }
 
