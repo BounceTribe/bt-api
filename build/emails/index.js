@@ -47,7 +47,7 @@ function sendEmail(_ref) {
         subject = 'New Tribe Request';
         headline = 'New Tribe Request!';
         mainText = byHandle + ' has invited you to their tribe.';
-        imgMainHref = siteDomain + '/acceptrequest/' + inviteId; //TODO
+        imgMainHref = siteDomain + '/acceptrequest/' + inviteId + '/' + byId; //TODO
         imgMainSrc = wordpressUploads + '/2017/11/Accept-Request-btn.png';
         break;
       }
