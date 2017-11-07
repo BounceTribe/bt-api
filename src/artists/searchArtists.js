@@ -3,11 +3,11 @@ import fetch from 'node-fetch'
 const searchArtists = (query) => {
   let url = `https://api.spotify.com/v1/search?q=${query}&type=artist&market=us&limit=50`
   let options = {
-      method: 'GET',
-      headers: {
-        Accept: 'application/json'
-      }
+    method: 'GET',
+    headers: {
+      Accept: 'application/json'
     }
+  }
   return new Promise( (resolve, reject) => {
     fetch(url, options)
     .then(result => result.json())

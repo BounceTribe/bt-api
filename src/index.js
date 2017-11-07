@@ -5,6 +5,11 @@ import createNotification from './createNotification'
 import sendEmail from './emails'
 import cors from 'cors'
 import Spotify from 'spotify-web-api-node'
+import {setPass, makeResourceServer, getClientGrant} from './updateAuth0'
+
+// setPass('chicken', 'auth0|59dc340358ecb5684ec394ad')
+// makeResourceServer()
+// getClientGrant()
 
 const app = express()
 

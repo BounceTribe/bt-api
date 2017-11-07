@@ -1,5 +1,5 @@
 import Mailgun from 'mailgun-js'
-// import {} from 'dotenv/config'
+import {} from 'dotenv/config'
 import {createHtml} from './createHtml'
 
 const siteDomain = 'https://test.bouncetribe.com'
