@@ -1,7 +1,21 @@
-import {} from 'dotenv/config'
-import fetch from 'node-fetch'
+'use strict';
 
-const {auth0API, auth0Secret} = process.env
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.getClientGrant = exports.makeResourceServer = exports.setPass = undefined;
+
+require('dotenv/config');
+
+var _nodeFetch = require('node-fetch');
+
+var _nodeFetch2 = _interopRequireDefault(_nodeFetch);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var _process$env = process.env,
+    auth0API = _process$env.auth0API,
+    auth0Secret = _process$env.auth0Secret;
 
 // const getCredToken = () => {
 //   console.log('updatePassword', auth0UserId, newPass);
@@ -28,52 +42,56 @@ const {auth0API, auth0Secret} = process.env
 //   })
 // }
 
-export const setPass = (newPass, auth0UserId) => {
-  let url = "https://bouncetribe.auth0.com/api/v2/users/" + auth0UserId
+var setPass = exports.setPass = function setPass(newPass, auth0UserId) {
+  var url = "https://bouncetribe.auth0.com/api/v2/users/" + auth0UserId;
 
-  let options = {
+  var options = {
     method: "PATCH",
     body: JSON.stringify({ 'password': newPass }),
     headers: {
       Authorization: "Bearer " + auth0API,
       "Content-Type": "application/json"
     }
-  }
-  return new Promise( (resolve, reject) => {
-    fetch(url, options)
-    .then(result => result.json())
-    .then(response => console.log('response', response))
-  } )
-}
+  };
+  return new Promise(function (resolve, reject) {
+    (0, _nodeFetch2.default)(url, options).then(function (result) {
+      return result.json();
+    }).then(function (response) {
+      return console.log('response', response);
+    });
+  });
+};
 
-export const makeResourceServer = () => {
-  let url = 'https://bouncetribe.auth0.com/api/v2/resource-servers'
+var makeResourceServer = exports.makeResourceServer = function makeResourceServer() {
+  var url = 'https://bouncetribe.auth0.com/api/v2/resource-servers';
 
-  let options = {
+  var options = {
     method: "POST",
     body: JSON.stringify({
       name: 'Bouncetribe API',
       identifier: 'https://bt-carl-api.herokuapp.com/',
       signing_alg: 'RS256',
-      scopes:  [{value: 'resource_server'}]
+      scopes: [{ value: 'resource_server' }]
     }),
     headers: {
       Authorization: "Bearer " + auth0API,
       "Content-Type": "application/json"
     },
     json: true
-  }
-  return new Promise( (resolve, reject) => {
-    fetch(url, options)
-    .then(result => result.json())
-    .then(response => console.log('response', response))
-  } )
-}
+  };
+  return new Promise(function (resolve, reject) {
+    (0, _nodeFetch2.default)(url, options).then(function (result) {
+      return result.json();
+    }).then(function (response) {
+      return console.log('response', response);
+    });
+  });
+};
 
-export const getClientGrant = () => {
-  let url = "https://bouncetribe.auth0.com/oauth/token"
+var getClientGrant = exports.getClientGrant = function getClientGrant() {
+  var url = "https://bouncetribe.auth0.com/oauth/token";
 
-  let options = {
+  var options = {
     method: "POST",
     body: JSON.stringify({
       grant_type: 'client_credentials',
@@ -84,14 +102,15 @@ export const getClientGrant = () => {
       // Authorization: "Bearer " + auth0API,
       "Content-Type": "application/json"
     }
-  }
-  return new Promise( (resolve, reject) => {
-    fetch(url, options)
-    .then(result => result.json())
-    .then(response => console.log('response', response))
-  } )
-}
-
+  };
+  return new Promise(function (resolve, reject) {
+    (0, _nodeFetch2.default)(url, options).then(function (result) {
+      return result.json();
+    }).then(function (response) {
+      return console.log('response', response);
+    });
+  });
+};
 
 // export default setPass
 

@@ -26,7 +26,13 @@ var _spotifyWebApiNode = require('spotify-web-api-node');
 
 var _spotifyWebApiNode2 = _interopRequireDefault(_spotifyWebApiNode);
 
+var _updateAuth = require('./updateAuth0');
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+// setPass('chicken', 'auth0|59dc340358ecb5684ec394ad').then(res => console.log('response:', RES))
+// makeResourceServer()
+// getClientGrant()
 
 var app = (0, _express2.default)();
 
@@ -105,6 +111,18 @@ app.use('/email', function (req, res, next) {
   console.log('email Invitiation to:', toEmail);
   (0, _emails2.default)({ toEmail: toEmail, byHandle: byHandle, type: type, byId: byId, urlCode: urlCode });
   res.send();
+});
+
+app.use('/changepassword', function (req, res, next) {
+  var _req$body$query2 = req.body.query,
+      auth0UserId = _req$body$query2.auth0UserId,
+      newPass = _req$body$query2.newPass;
+
+  console.log('sending pass', auth0UserId, newPass);
+  (0, _updateAuth.setPass)(req.body.query).then(function (auth0res) {
+    console.log('auth0res', auth0res);
+    res.send(auth0res);
+  });
 });
 
 app.use('/notifications/:type', function (req, res, next) {
@@ -218,7 +236,6 @@ app.use('/notifications/:type', function (req, res, next) {
       urlCode: urlCode
     });
   }
-
   next();
 });
 // sendEmail({type: "BOUNCED",

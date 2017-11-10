@@ -9,13 +9,13 @@ var _mailgunJs = require('mailgun-js');
 
 var _mailgunJs2 = _interopRequireDefault(_mailgunJs);
 
+require('dotenv/config');
+
 var _createHtml = require('./createHtml');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var siteDomain = 'https://test.bouncetribe.com';
-// import {} from 'dotenv/config'
-
 var domain = 'mail.bouncetribe.com';
 var wordpressUploads = 'http://bouncetribe.com/wp-content/uploads';
 var apiKey = process.env.mailgunKey;

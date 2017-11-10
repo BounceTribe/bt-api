@@ -7,7 +7,7 @@ import cors from 'cors'
 import Spotify from 'spotify-web-api-node'
 import {setPass, makeResourceServer, getClientGrant} from './updateAuth0'
 
-// setPass('chicken', 'auth0|59dc340358ecb5684ec394ad')
+// setPass('chicken', 'auth0|59dc340358ecb5684ec394ad').then(res => console.log('response:', RES))
 // makeResourceServer()
 // getClientGrant()
 
@@ -85,6 +85,15 @@ app.use('/email', (req, res, next) => {
   console.log('email Invitiation to:', toEmail)
   sendEmail({toEmail, byHandle, type, byId, urlCode})
   res.send()
+})
+
+app.use('/changepassword', (req, res, next) => {
+  let {auth0UserId, newPass} = req.body.query
+  console.log('sending pass', auth0UserId, newPass)
+  setPass(req.body.query).then( auth0res => {
+    console.log('auth0res', auth0res)
+    res.send(auth0res)
+  })
 })
 
 app.use('/notifications/:type', (req, res, next) => {
@@ -196,8 +205,6 @@ app.use('/notifications/:type', (req, res, next) => {
       urlCode
     })
   }
-
-
   next()
 })
 // sendEmail({type: "BOUNCED",
