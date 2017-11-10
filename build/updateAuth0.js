@@ -1,13 +1,11 @@
-'use strict';
+"use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.getClientGrant = exports.makeResourceServer = exports.setPass = undefined;
 
-require('dotenv/config');
-
-var _nodeFetch = require('node-fetch');
+var _nodeFetch = require("node-fetch");
 
 var _nodeFetch2 = _interopRequireDefault(_nodeFetch);
 
@@ -41,6 +39,8 @@ var _process$env = process.env,
 //     })
 //   })
 // }
+
+// import {} from 'dotenv/config'
 
 var setPass = exports.setPass = function setPass(newPass, auth0UserId) {
   var url = "https://bouncetribe.auth0.com/api/v2/users/" + auth0UserId;

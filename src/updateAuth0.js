@@ -1,4 +1,4 @@
-import {} from 'dotenv/config'
+// import {} from 'dotenv/config'
 import fetch from 'node-fetch'
 
 const {auth0API, auth0Secret} = process.env
