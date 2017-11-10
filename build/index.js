@@ -30,7 +30,8 @@ var _updateAuth = require('./updateAuth0');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-// setPass('chicken', 'auth0|59dc340358ecb5684ec394ad').then(res => console.log('response:', RES))
+// setPass({newPass:'chicken', auth0UserId:'auth0|5a056486b6be6057b283c62d'}).then(res => console.log('response:', RES))
+// testQuery('holesinaarrel@gmail.com').then(res => console.log('response:', RES))
 // makeResourceServer()
 // getClientGrant()
 
@@ -114,6 +115,7 @@ app.use('/email', function (req, res, next) {
 });
 
 app.use('/changepassword', function (req, res, next) {
+  console.log('body', req.body);
   var _req$body$query2 = req.body.query,
       auth0UserId = _req$body$query2.auth0UserId,
       newPass = _req$body$query2.newPass;

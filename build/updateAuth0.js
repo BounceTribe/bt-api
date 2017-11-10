@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.getClientGrant = exports.makeResourceServer = exports.setPass = undefined;
+exports.testQuery = exports.getClientGrant = exports.makeResourceServer = exports.setPass = undefined;
 
 var _nodeFetch = require("node-fetch");
 
@@ -42,7 +42,10 @@ var _process$env = process.env,
 
 // import {} from 'dotenv/config'
 
-var setPass = exports.setPass = function setPass(newPass, auth0UserId) {
+var setPass = exports.setPass = function setPass(_ref) {
+  var newPass = _ref.newPass,
+      auth0UserId = _ref.auth0UserId;
+
   var url = "https://bouncetribe.auth0.com/api/v2/users/" + auth0UserId;
 
   var options = {
@@ -57,7 +60,7 @@ var setPass = exports.setPass = function setPass(newPass, auth0UserId) {
     (0, _nodeFetch2.default)(url, options).then(function (result) {
       return result.json();
     }).then(function (response) {
-      return console.log('response', response);
+      return console.log('response', resolve(response));
     });
   });
 };
@@ -100,6 +103,26 @@ var getClientGrant = exports.getClientGrant = function getClientGrant() {
       audience: 'https://bt-carl-api.herokuapp.com/' }), //TODO
     headers: {
       // Authorization: "Bearer " + auth0API,
+      "Content-Type": "application/json"
+    }
+  };
+  return new Promise(function (resolve, reject) {
+    (0, _nodeFetch2.default)(url, options).then(function (result) {
+      return result.json();
+    }).then(function (response) {
+      return console.log('response', response);
+    });
+  });
+};
+
+var testQuery = exports.testQuery = function testQuery(auth0UserId) {
+  var url = "https://bouncetribe.auth0.com/api/v2/users?q=email.raw%3A%22subliminal_lime%40hotmail.com%22&search_engine=v2";
+  var options = {
+    method: "GET",
+    // body: JSON.stringify({ 'password': newPass }),
+    // body: { q: 'email.raw:"holesinabarrel@gmail.com"', search_engine: 'v2' },
+    headers: {
+      Authorization: "Bearer " + auth0API,
       "Content-Type": "application/json"
     }
   };

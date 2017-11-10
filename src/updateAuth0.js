@@ -28,7 +28,7 @@ const {auth0API, auth0Secret} = process.env
 //   })
 // }
 
-export const setPass = (newPass, auth0UserId) => {
+export const setPass = ({newPass, auth0UserId}) => {
   let url = "https://bouncetribe.auth0.com/api/v2/users/" + auth0UserId
 
   let options = {
@@ -42,7 +42,7 @@ export const setPass = (newPass, auth0UserId) => {
   return new Promise( (resolve, reject) => {
     fetch(url, options)
     .then(result => result.json())
-    .then(response => console.log('response', response))
+    .then(response => console.log('response', resolve(response)))
   } )
 }
 
@@ -82,6 +82,25 @@ export const getClientGrant = () => {
       audience: 'https://bt-carl-api.herokuapp.com/' }), //TODO
     headers: {
       // Authorization: "Bearer " + auth0API,
+      "Content-Type": "application/json"
+    }
+  }
+  return new Promise( (resolve, reject) => {
+    fetch(url, options)
+    .then(result => result.json())
+    .then(response => console.log('response', response))
+  } )
+}
+
+
+export const testQuery = (auth0UserId) => {
+  let url = "https://bouncetribe.auth0.com/api/v2/users?q=email.raw%3A%22subliminal_lime%40hotmail.com%22&search_engine=v2"
+  let options = {
+    method: "GET",
+    // body: JSON.stringify({ 'password': newPass }),
+    // body: { q: 'email.raw:"holesinabarrel@gmail.com"', search_engine: 'v2' },
+    headers: {
+      Authorization: "Bearer " + auth0API,
       "Content-Type": "application/json"
     }
   }

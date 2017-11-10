@@ -5,9 +5,10 @@ import createNotification from './createNotification'
 import sendEmail from './emails'
 import cors from 'cors'
 import Spotify from 'spotify-web-api-node'
-import {setPass, makeResourceServer, getClientGrant} from './updateAuth0'
+import {setPass, makeResourceServer, getClientGrant, testQuery} from './updateAuth0'
 
-// setPass('chicken', 'auth0|59dc340358ecb5684ec394ad').then(res => console.log('response:', RES))
+// setPass({newPass:'chicken', auth0UserId:'auth0|5a056486b6be6057b283c62d'}).then(res => console.log('response:', RES))
+// testQuery('holesinaarrel@gmail.com').then(res => console.log('response:', RES))
 // makeResourceServer()
 // getClientGrant()
 
@@ -88,6 +89,7 @@ app.use('/email', (req, res, next) => {
 })
 
 app.use('/changepassword', (req, res, next) => {
+  console.log('body', req.body);
   let {auth0UserId, newPass} = req.body.query
   console.log('sending pass', auth0UserId, newPass)
   setPass(req.body.query).then( auth0res => {
