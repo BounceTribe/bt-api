@@ -33,7 +33,7 @@ export default function sendEmail({toEmail, byHandle, byId, inviteId, type, proj
 
     case 'PROJECT_FEEDBACK_RECEIVED':{
       headline = 'Feedback Received!'
-      mainText = `${byHandle} liked your ${projectTitle} project and bounced it to share with their tribe.`
+      mainText = `${byHandle} liked your ${projectTitle} has given you some feedback. See what they had to say.`
       imgMainHref =`${siteDomain}/${forHandle}/${projectTitle}`
       imgMainSrc  = `${wordpressUploads}/2017/11/View-Feedback-btn.png`
       subject = 'Feedback Received'
